@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVh-gi-5tM">
+                                <rect key="frame" x="16" y="28" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="ujP-mc-3sh"/>
+                                </constraints>
+                                <state key="normal" title="连接"/>
+                                <connections>
+                                    <action selector="actionConnectBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DmJ-eD-TPr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dj-dn-OKT">
+                                <rect key="frame" x="118" y="28" width="93.5" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="fFH-Ob-3No"/>
+                                </constraints>
+                                <state key="normal" title="开启会话"/>
+                                <connections>
+                                    <action selector="actionSessionBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OKT-qg-YUT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfl-sA-p6C">
+                                <rect key="frame" x="219" y="28" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="mxK-Jd-FqC"/>
+                                </constraints>
+                                <state key="normal" title="关闭会话"/>
+                                <connections>
+                                    <action selector="actionDisconnectBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XSK-td-axS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Dfl-sA-p6C" firstAttribute="leading" secondItem="5Dj-dn-OKT" secondAttribute="trailing" constant="7.5" id="2ur-tb-pyW"/>
+                            <constraint firstItem="bVh-gi-5tM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="6qG-00-Jh9"/>
+                            <constraint firstItem="5Dj-dn-OKT" firstAttribute="leading" secondItem="bVh-gi-5tM" secondAttribute="trailing" constant="8" id="9me-fa-1cZ"/>
+                            <constraint firstItem="Dfl-sA-p6C" firstAttribute="width" secondItem="5Dj-dn-OKT" secondAttribute="width" id="SX4-4f-mCZ"/>
+                            <constraint firstItem="5Dj-dn-OKT" firstAttribute="width" secondItem="bVh-gi-5tM" secondAttribute="width" id="Tyk-Fj-OaQ"/>
+                            <constraint firstItem="bVh-gi-5tM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XLK-Vr-AtY"/>
+                            <constraint firstItem="5Dj-dn-OKT" firstAttribute="top" secondItem="bVh-gi-5tM" secondAttribute="top" id="aMs-0K-nWl"/>
+                            <constraint firstItem="Dfl-sA-p6C" firstAttribute="top" secondItem="5Dj-dn-OKT" secondAttribute="top" id="bRy-tY-XpM"/>
+                            <constraint firstItem="bVh-gi-5tM" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="hcc-Sp-sbO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-87.200000000000003" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>
