@@ -35,11 +35,40 @@
     [_machine destoryMachine];
 }
 
-- (void)startSession {
-    [_machine startSession:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
-        NSString *resultStr = error ? error.description : @"成功";
-        NSLog(@"开启会话结果: %@", resultStr);
-    }];
+- (void)startSession:(ReturnBlock)block {
+//    [_machine startSession:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+//        NSString *resultStr = error ? error.description : @"成功";
+//        NSLog(@"开启会话结果: %@", resultStr);
+//    }];
+    [_machine startSession:block];
+}
+
+- (void)takePhoto:(ReturnBlock)block {
+//    [_machine shutter:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+//        NSString *resultStr = error ? error.description : @"成功";
+//        NSLog(@"拍照结果: %@", resultStr);
+//    }];
+    [_machine shutter:block];
+}
+
+- (void)startRecord:(ReturnBlock)block {
+    [_machine startRecord:block];
+}
+
+- (void)stopRecord:(ReturnBlock)block {
+    [_machine stopRecord:block];
+}
+
+- (void)currentMachineStatus:(ReturnBlock)block {
+    [_machine currentSettingStatus:block];
+}
+
+- (void)formatSDCard:(ReturnBlock)block {
+    [_machine formatSDCard:block];
+}
+
+- (void)listAllFiles:(ReturnBlock)block {
+    [_machine listAllFiles:block];
 }
 
 #pragma mark - AmbaMachineDelegate

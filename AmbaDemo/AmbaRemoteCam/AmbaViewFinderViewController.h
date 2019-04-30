@@ -21,10 +21,10 @@
 }
 
 @property (nonatomic, retain) AmbaRTSPPlayer    *video;
-- (IBAction)shutterCmd:(id)sender;
+- (IBAction)shutterCmd:(id)sender; // 拍照
 - (IBAction)stopContShutter:(id)sender;
-- (IBAction)startRec:(id)sender;
-- (IBAction)stopRec:(id)sender;
+- (IBAction)startRec:(id)sender; // 开启录制
+- (IBAction)stopRec:(id)sender; // 关闭录制
 
 - (IBAction)splitRecord:(id)sender;
 

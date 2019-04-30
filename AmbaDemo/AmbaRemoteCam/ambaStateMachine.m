@@ -1071,7 +1071,7 @@ static ambaStateMachine *instance = nil;
     [self ambaLogString:message toFile:AMBALOGFILE];
     
     
-    
+    NSLog(@"response to cmd: %@", currentCommand);
     if ([[replyDictionary objectForKey:msgIdKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:notificationMsgId/*manualOperationMsgID*/]])
     {
         NSLog(@"!!!GOT NOTIFICATION MSG From Camera!!!");

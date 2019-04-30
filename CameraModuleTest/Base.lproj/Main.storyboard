@@ -28,6 +28,44 @@
                                     <action selector="actionConnectBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DmJ-eD-TPr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btD-pq-kok">
+                                <rect key="frame" x="16" y="72" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="IMz-xr-18e"/>
+                                </constraints>
+                                <state key="normal" title="拍照"/>
+                                <connections>
+                                    <action selector="actionTakePhotoBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X8y-ZF-ay5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2CU-ir-9I6">
+                                <rect key="frame" x="16" y="116" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="Vmf-nj-jCc"/>
+                                </constraints>
+                                <state key="normal" title="Setting"/>
+                                <connections>
+                                    <action selector="actionSettingBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dnu-JW-vAb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6YZ-Ut-r5m">
+                                <rect key="frame" x="16" y="611" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="L2V-27-hHQ"/>
+                                    <constraint firstAttribute="width" constant="94" id="RQb-pu-JgD"/>
+                                </constraints>
+                                <state key="normal" title="..."/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Isc-B1-YL0">
+                                <rect key="frame" x="118" y="72" width="93.5" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="sdS-h1-PCf"/>
+                                </constraints>
+                                <state key="normal" title="开启录制"/>
+                                <connections>
+                                    <action selector="actionStartRecordBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mei-zI-hL0"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dj-dn-OKT">
                                 <rect key="frame" x="118" y="28" width="93.5" height="36"/>
                                 <constraints>
@@ -48,18 +86,68 @@
                                     <action selector="actionDisconnectBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XSK-td-axS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaQ-A4-NHP">
+                                <rect key="frame" x="219" y="72" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="tRD-Br-7sa"/>
+                                </constraints>
+                                <state key="normal" title="关闭录制"/>
+                                <connections>
+                                    <action selector="actionStopRecordBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yKY-LP-yFQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j13-GW-0OM">
+                                <rect key="frame" x="118" y="116" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="NIY-lH-KGU"/>
+                                    <constraint firstAttribute="width" constant="94" id="TJ7-zD-3Tf"/>
+                                </constraints>
+                                <state key="normal" title="格式化SD卡"/>
+                                <connections>
+                                    <action selector="actionFormatSDBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="THh-Gf-Y3I"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4I-Ue-FYj">
+                                <rect key="frame" x="219" y="116" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="5SI-AF-b2U"/>
+                                    <constraint firstAttribute="height" constant="36" id="GQA-RS-gJE"/>
+                                </constraints>
+                                <state key="normal" title="加载文件列表"/>
+                                <connections>
+                                    <action selector="actionListAllFiles:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7WQ-k4-hHp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="RaQ-A4-NHP" firstAttribute="leading" secondItem="Isc-B1-YL0" secondAttribute="trailing" constant="7.5" id="15L-mH-UYL"/>
                             <constraint firstItem="Dfl-sA-p6C" firstAttribute="leading" secondItem="5Dj-dn-OKT" secondAttribute="trailing" constant="7.5" id="2ur-tb-pyW"/>
+                            <constraint firstItem="J4I-Ue-FYj" firstAttribute="leading" secondItem="j13-GW-0OM" secondAttribute="trailing" constant="7" id="5K3-gA-phy"/>
                             <constraint firstItem="bVh-gi-5tM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="6qG-00-Jh9"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="leading" secondItem="bVh-gi-5tM" secondAttribute="trailing" constant="8" id="9me-fa-1cZ"/>
+                            <constraint firstItem="btD-pq-kok" firstAttribute="leading" secondItem="bVh-gi-5tM" secondAttribute="leading" id="BGe-tx-xPn"/>
+                            <constraint firstItem="Isc-B1-YL0" firstAttribute="top" secondItem="btD-pq-kok" secondAttribute="top" id="Dij-X2-0t6"/>
+                            <constraint firstItem="6YZ-Ut-r5m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Dy8-lU-KKM"/>
+                            <constraint firstItem="2CU-ir-9I6" firstAttribute="width" secondItem="btD-pq-kok" secondAttribute="width" id="Ggy-HJ-3XZ"/>
+                            <constraint firstItem="RaQ-A4-NHP" firstAttribute="width" secondItem="Isc-B1-YL0" secondAttribute="width" id="IV7-51-cjX"/>
+                            <constraint firstItem="j13-GW-0OM" firstAttribute="top" secondItem="2CU-ir-9I6" secondAttribute="top" id="MfI-Xa-vrg"/>
+                            <constraint firstItem="Isc-B1-YL0" firstAttribute="leading" secondItem="btD-pq-kok" secondAttribute="trailing" constant="8" id="O7p-PV-twY"/>
+                            <constraint firstItem="J4I-Ue-FYj" firstAttribute="top" secondItem="RaQ-A4-NHP" secondAttribute="bottom" constant="8" id="QQW-9a-VBz"/>
                             <constraint firstItem="Dfl-sA-p6C" firstAttribute="width" secondItem="5Dj-dn-OKT" secondAttribute="width" id="SX4-4f-mCZ"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="width" secondItem="bVh-gi-5tM" secondAttribute="width" id="Tyk-Fj-OaQ"/>
+                            <constraint firstItem="2CU-ir-9I6" firstAttribute="top" secondItem="btD-pq-kok" secondAttribute="bottom" constant="8" id="UZS-XL-BSL"/>
                             <constraint firstItem="bVh-gi-5tM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XLK-Vr-AtY"/>
+                            <constraint firstItem="2CU-ir-9I6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="YNL-dX-Uih"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="top" secondItem="bVh-gi-5tM" secondAttribute="top" id="aMs-0K-nWl"/>
                             <constraint firstItem="Dfl-sA-p6C" firstAttribute="top" secondItem="5Dj-dn-OKT" secondAttribute="top" id="bRy-tY-XpM"/>
+                            <constraint firstItem="btD-pq-kok" firstAttribute="top" secondItem="bVh-gi-5tM" secondAttribute="bottom" constant="8" id="eF3-1v-7qQ"/>
+                            <constraint firstItem="Isc-B1-YL0" firstAttribute="width" secondItem="btD-pq-kok" secondAttribute="width" id="fPn-uO-Kjv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6YZ-Ut-r5m" secondAttribute="bottom" constant="20" id="h8y-7P-025"/>
                             <constraint firstItem="bVh-gi-5tM" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="hcc-Sp-sbO"/>
+                            <constraint firstItem="j13-GW-0OM" firstAttribute="leading" secondItem="2CU-ir-9I6" secondAttribute="trailing" constant="8" id="rsO-OR-p0i"/>
+                            <constraint firstItem="btD-pq-kok" firstAttribute="width" secondItem="bVh-gi-5tM" secondAttribute="width" id="t0t-T2-1gU"/>
+                            <constraint firstItem="RaQ-A4-NHP" firstAttribute="top" secondItem="Isc-B1-YL0" secondAttribute="top" id="wVC-0V-doL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

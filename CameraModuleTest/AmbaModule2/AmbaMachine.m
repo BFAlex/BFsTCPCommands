@@ -250,6 +250,96 @@ static dispatch_once_t onceToken;
     [self addOrder:command];
 }
 
+- (void)shutter:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = shutterCmd;
+    int curMessageId = shutterMsgId;
+    command.messageId = curMessageId;
+    command.taskBlock = ^{
+
+        id commandData = [self configCommandData:curMessageId];
+        [self writeDataToCamera:commandData andError:nil];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)startRecord:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = recordStartCmd;
+    int curMessageId = recordStartMsgId;
+    command.messageId = curMessageId;
+    command.taskBlock = ^{
+        
+        id commandData = [self configCommandData:curMessageId];
+        [self writeDataToCamera:commandData andError:nil];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)stopRecord:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = recordStopCmd;
+    int curMessageId = recordStopMsgId;
+    command.messageId = curMessageId;
+    command.taskBlock = ^{
+        
+        id commandData = [self configCommandData:curMessageId];
+        [self writeDataToCamera:commandData andError:nil];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)currentSettingStatus:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = allSettingsCmd;
+    int curMessageId = allSettingsMsgId;
+    command.messageId = curMessageId;
+    command.taskBlock = ^{
+        
+        id commandData = [self configCommandData:curMessageId];
+        [self writeDataToCamera:commandData andError:nil];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)formatSDCard:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = formatSDMediaCmd;
+    int curMessageId = formatSDMediaMsgId;
+    command.messageId = curMessageId;
+    command.taskBlock = ^{
+        
+        id commandData = [self configCommandData:curMessageId];
+        [self writeDataToCamera:commandData andError:nil];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)listAllFiles:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = listAllFilesCmd;
+    int curMessageId = listAllFilesMsgId;
+    command.messageId = curMessageId;
+    command.taskBlock = ^{
+        
+        id commandData = [self configCommandData:curMessageId];
+        [self writeDataToCamera:commandData andError:nil];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
 - (id)configCommandData:(unsigned int)commandCode {
     
     NSDictionary *commandDict;
@@ -433,41 +523,167 @@ static dispatch_once_t onceToken;
 
 - (void)messageReceived:(id)result {
     
-    NSDictionary *resultDict;
-    if ([result isKindOfClass:[NSString class]]) {
-        resultDict = [self convertStringToDictionary:result];
-    } else {
-        resultDict = (NSDictionary *)result;
-    }
+//    NSDictionary *resultDict;
+//    if ([result isKindOfClass:[NSString class]]) {
+//        resultDict = [self convertStringToDictionary:result];
+//    } else {
+//        resultDict = (NSDictionary *)result;
+//    }
     
-    [self handleDictResult:resultDict];
-    
-    [self.lockOfNetwork unlock];
+//    [self.lockOfNetwork unlock];
+    [self handleResultStringMsg:result];
 }
 
-- (void)handleDictResult:(NSDictionary *)resultDict {
+- (void)handleResultStringMsg:(id)responseMsg {
     
-    if ([[resultDict objectForKey:msgIdKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:notificationMsgId]]) {
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        responseDict = [self convertStringToDictionary:responseMsg];
+    }
+    
+    if ([[responseDict objectForKey:msgIdKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:notificationMsgId]]) {
         //......
     }
     else if (_curCommand.messageId == startSessionMsgId)
     {
-        [self responseToStartSession:resultDict];
+        [self responseToStartSession:responseMsg];
     }
     else if (_curCommand.messageId == stopSessionMsgId)
     {
-        [self responseToStopSession:resultDict];
+        [self responseToStopSession:responseDict];
+    }
+    else if (_curCommand.messageId == shutterMsgId)
+    {
+        [self responseToShutter:responseDict];
+    }
+    else if (_curCommand.messageId == recordStartMsgId)
+    {
+        [self responseToStartSession:responseDict];
+    }
+    else if (_curCommand.messageId == recordStopMsgId)
+    {
+        [self responseToStopSession:responseMsg];
+    }
+    else if (_curCommand.messageId == allSettingsMsgId)
+    {
+        [self responseToGetAllCurrentSettingsStatus:responseMsg];
+    }
+    else if (_curCommand.messageId == formatSDMediaMsgId)
+    {
+        [self responseToFormatSDCard:responseMsg];
+    }
+    else if (_curCommand.messageId == listAllFilesMsgId)
+    {
+        [self responseToListAllFiles:responseMsg];
     }
 }
 
 #pragma mark - Handle Message
 
-- (void)responseToStopSession:(NSDictionary *)responseDict {
-    
-    NSLog(@"Response to Stop Session received");
-    NSLog(@":::: %@",responseDict);
+- (void)responseToListAllFiles:(id)responseMsg {
     
     NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    if (rval != 0) {
+        error = [self errorForDescription:@"Start Record fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToFormatSDCard:(id)responseMsg {
+    NSLog(@"response to format sd card: %@", responseMsg);
+}
+
+- (void)responseToGetAllCurrentSettingsStatus:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    if (rval != 0) {
+        error = [self errorForDescription:@"Settings status fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToStartRecord:(NSDictionary *)responseDict {
+    
+    NSError *error;
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    if (rval != 0) {
+        error = [self errorForDescription:@"Start Record fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToStopRecord:(NSDictionary *)responseDict {
+    
+    NSError *error;
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    if (rval != 0) {
+        error = [self errorForDescription:@"Stop Record fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToShutter:(NSDictionary *)responseDict {
+//    NSLog(@"%@: %@", NSStringFromSelector(_cmd), responseDict);
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    NSLog(@"Shutter result: %d", rval);
+    
+    NSError *error;
+    if (rval != 0) {
+        error = [self errorForDescription:@"shutter fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToStopSession:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
     if ([[responseDict objectForKey:rvalKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:0]])
     {
         self.isConnected = NO;
@@ -482,30 +698,55 @@ static dispatch_once_t onceToken;
     }
     
     if (self.curCommand.returnBlock) {
-        _curCommand.returnBlock(error, 0, nil, ResultTypeNone);
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
     }
 }
 
-- (void)responseToStartSession:(NSDictionary *)responseDict {
+- (void)responseToStartSession:(id)responseMsg {
     
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        responseDict = [self analysisDataFromStringToDictionary:responseMsg];
+    } else {
+        responseDict = responseMsg;
+    }
     NSLog(@"rval %@", (NSNumber *)[responseDict objectForKey:rvalKey]);
     if ([[responseDict objectForKey:rvalKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:0]])
     {
         _sessionToken = [[responseDict objectForKey:paramKey] intValue];
         NSLog(@"开启会话成功 》》》》");
-        _curCommand.returnBlock(nil, 0, nil, ResultTypeNone);
     }
-    // send an error message about camera refusing a lock
     else
     {
         NSLog(@"开启会话失败 》》》》Camera refuses to Start Session");
-        NSError *error = [NSError errorWithDomain:NSURLErrorDomain code:101 userInfo:@{NSLocalizedDescriptionKey:@"star session fail"}];
-        _curCommand.returnBlock(error, 0, nil, ResultTypeNone);
+        error = [NSError errorWithDomain:NSURLErrorDomain code:101 userInfo:@{NSLocalizedDescriptionKey:@"star session fail"}];
     }
-    NSLog(@"开启会话结果：%@", responseDict);
+    _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+}
+
+- (NSError *)errorForDescription:(NSString *)desc {
+    
+    if (desc.length < 1) {
+        desc = @"unknown";
+    }
+    return [NSError errorWithDomain:NSURLErrorDomain code:101 userInfo:@{NSLocalizedDescriptionKey:desc}];
 }
 
 #pragma mark -
+
+- (NSDictionary *)analysisDataFromStringToDictionary:(NSString *)responseMsg {
+    
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    }
+    
+    return responseDict;
+}
 
 - (NSDictionary *)convertStringToDictionary:(NSString *)jsonInString
 {
@@ -645,7 +886,7 @@ static dispatch_once_t onceToken;
      */
     [NSThread sleepForTimeInterval:0.5f];
 
-    [self.lockOfNetwork lock];
+//    [self.lockOfNetwork lock];
     self.curCommand = order;
     order.taskBlock();
 

@@ -15,7 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)connectToCamera:(ReturnBlock)block;
 - (void)disconnectFromCamera:(ReturnBlock)block;
-- (void)startSession;
+- (void)startSession:(ReturnBlock)block;
+- (void)takePhoto:(ReturnBlock)block;
+- (void)startRecord:(ReturnBlock)block;
+- (void)stopRecord:(ReturnBlock)block;
+- (void)currentMachineStatus:(ReturnBlock)block;
+- (void)formatSDCard:(ReturnBlock)block;
+- (void)listAllFiles:(ReturnBlock)block;
 
 @end
 

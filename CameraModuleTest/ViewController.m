@@ -26,18 +26,65 @@
     
     [_ambaController connectToCamera:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
         NSLog(@"tcp 连接会话结果：%@", !error?@"成功":error.description);
+        NSLog(@"tcp连接结果: %@", result);
     }];
 }
 - (IBAction)actionSessionBtn:(UIButton *)sender {
     
-    for (int i = 0; i < 20; i++) {
-        [_ambaController startSession];
-        NSLog(@"???: %d", i);
-    }
+    [_ambaController startSession:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"开启会话结果: %@", resultStr);
+        
+        [self actionSettingBtn:nil];
+    }];
 }
 - (IBAction)actionDisconnectBtn:(UIButton *)sender {
     [_ambaController disconnectFromCamera:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
         NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSLog(@"断开连接...");
+    }];
+}
+- (IBAction)actionTakePhotoBtn:(UIButton *)sender {
+    [_ambaController takePhoto:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"拍照结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionStartRecordBtn:(UIButton *)sender {
+    [_ambaController startRecord:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"开启录制结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionStopRecordBtn:(UIButton *)sender {
+    [_ambaController stopRecord:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"关闭录制结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionSettingBtn:(UIButton *)sender {
+    [_ambaController currentMachineStatus:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"setting结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionFormatSDBtn:(UIButton *)sender {
+    [_ambaController formatSDCard:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"Format SD 结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionListAllFiles:(UIButton *)sender {
+    [_ambaController listAllFiles:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"List All Files结果: %@", resultStr);
     }];
 }
 
