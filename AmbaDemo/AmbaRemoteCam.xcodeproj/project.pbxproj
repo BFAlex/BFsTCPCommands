@@ -1,0 +1,935 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		214FD0081B314A7B008717DA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214FD0071B314A7B008717DA /* MediaPlayer.framework */; };
+		21663B861B69BD5D00DB52D8 /* AmbaRTSPPlayBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 21663B851B69BD5D00DB52D8 /* AmbaRTSPPlayBack.m */; };
+		219331D81AF869CE00582599 /* remoteCamiPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 219331D71AF869CE00582599 /* remoteCamiPhone.storyboard */; };
+		21BBDC7C1B73392000373CFE /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BBDC7B1B73392000373CFE /* AudioStreamer.m */; };
+		21BD47341BBBFDD600488FD8 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BD47331BBBFDD600488FD8 /* CoreAudio.framework */; };
+		21BD47361BBBFDEC00488FD8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BD47351BBBFDEC00488FD8 /* Accelerate.framework */; };
+		21BD47381BBBFDF500488FD8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21BD47371BBBFDF500488FD8 /* OpenGLES.framework */; };
+		85047A7E1A4D43F800F5B14D /* AmbaRemoteCamiPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85047A7D1A4D43F800F5B14D /* AmbaRemoteCamiPad.storyboard */; };
+		85047A811A4D4ABA00F5B14D /* bleScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85047A801A4D4ABA00F5B14D /* bleScanViewController.m */; };
+		85047A851A4D5C4700F5B14D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85047A841A4D5C4700F5B14D /* CoreBluetooth.framework */; };
+		85047A881A4D5E2C00F5B14D /* ambaStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 85047A871A4D5E2C00F5B14D /* ambaStateMachine.m */; };
+		850DB0861A50F65F0084233B /* serviceCharacteristicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 850DB0851A50F65F0084233B /* serviceCharacteristicsViewController.m */; };
+		851594541A53AE0C002689D4 /* AmbaRemoteCam.png in Resources */ = {isa = PBXBuildFile; fileRef = 851594531A53AE0C002689D4 /* AmbaRemoteCam.png */; };
+		85382AAD1A4D438B001BEB87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85382AAC1A4D438B001BEB87 /* Foundation.framework */; };
+		85382AAF1A4D438B001BEB87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85382AAE1A4D438B001BEB87 /* CoreGraphics.framework */; };
+		85382AB11A4D438B001BEB87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85382AB01A4D438B001BEB87 /* UIKit.framework */; };
+		85382AB71A4D438B001BEB87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85382AB51A4D438B001BEB87 /* InfoPlist.strings */; };
+		85382AB91A4D438B001BEB87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 85382AB81A4D438B001BEB87 /* main.m */; };
+		85382ABD1A4D438B001BEB87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 85382ABC1A4D438B001BEB87 /* AppDelegate.m */; };
+		85382ABF1A4D438B001BEB87 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85382ABE1A4D438B001BEB87 /* Images.xcassets */; };
+		85382AC61A4D438B001BEB87 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85382AC51A4D438B001BEB87 /* XCTest.framework */; };
+		85382AC71A4D438B001BEB87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85382AAC1A4D438B001BEB87 /* Foundation.framework */; };
+		85382AC81A4D438B001BEB87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85382AB01A4D438B001BEB87 /* UIKit.framework */; };
+		85382AD01A4D438B001BEB87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85382ACE1A4D438B001BEB87 /* InfoPlist.strings */; };
+		85382AD21A4D438B001BEB87 /* AmbaRemoteCamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85382AD11A4D438B001BEB87 /* AmbaRemoteCamTests.m */; };
+		854B8E951A4DA62300FFD081 /* wifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854B8E941A4DA62300FFD081 /* wifiViewController.m */; };
+		8587ECD61AAEDFAF00BBD536 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8587ECD51AAEDFAF00BBD536 /* button.png */; };
+		85A299AC1A76024B008EA154 /* AMBACameraCommandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A299AB1A76024B008EA154 /* AMBACameraCommandsViewController.m */; };
+		85A299AF1A7602B1008EA154 /* AMBALogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A299AE1A7602B1008EA154 /* AMBALogViewController.m */; };
+		85A29ACC1A67739400724EB8 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29ACB1A67739400724EB8 /* libiconv.dylib */; };
+		85A29ACE1A6773C000724EB8 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29ACD1A6773C000724EB8 /* libbz2.dylib */; };
+		85A29AD01A67741300724EB8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29ACF1A67741300724EB8 /* libz.dylib */; };
+		85A29BB21A67754300724EB8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BB11A67754300724EB8 /* AVFoundation.framework */; };
+		85A29BB41A67755B00724EB8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BB31A67755B00724EB8 /* QuartzCore.framework */; };
+		85A29BB61A67756400724EB8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BB51A67756400724EB8 /* AudioToolbox.framework */; };
+		85A29BB81A67756F00724EB8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BB71A67756F00724EB8 /* CoreMedia.framework */; };
+		85A29BBA1A67757700724EB8 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BB91A67757700724EB8 /* CoreImage.framework */; };
+		85A29BBC1A67757F00724EB8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BBB1A67757F00724EB8 /* CoreVideo.framework */; };
+		85A29BBF1A67765000724EB8 /* AmbaViewFinderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A29BBE1A67765000724EB8 /* AmbaViewFinderViewController.m */; };
+		85A29BC21A67793D00724EB8 /* AmbaRTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A29BC11A67793D00724EB8 /* AmbaRTSPPlayer.m */; };
+		85A29BC31A677EDD00724EB8 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BAA1A67752000724EB8 /* libavcodec.a */; };
+		85A29BC41A677EDD00724EB8 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BAB1A67752000724EB8 /* libavdevice.a */; };
+		85A29BC51A677EDD00724EB8 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BAC1A67752000724EB8 /* libavfilter.a */; };
+		85A29BC61A677EDD00724EB8 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BAD1A67752000724EB8 /* libavformat.a */; };
+		85A29BC71A677EDD00724EB8 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BAE1A67752000724EB8 /* libavutil.a */; };
+		85A29BC81A677EDD00724EB8 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BAF1A67752000724EB8 /* libswresample.a */; };
+		85A29BC91A677EDD00724EB8 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A29BB01A67752000724EB8 /* libswscale.a */; };
+		85A399D01A8AF730004FEF3D /* fileUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A399CF1A8AF730004FEF3D /* fileUpload.m */; };
+		85A399D21A8B2EC2004FEF3D /* orange_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 85A399D11A8B2EC2004FEF3D /* orange_button.png */; };
+		85AF9E221A68B35A003397DD /* radio-button-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 85AF9E211A68B35A003397DD /* radio-button-off.png */; };
+		85AF9E241A68B361003397DD /* radio-button-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 85AF9E231A68B361003397DD /* radio-button-on.png */; };
+		85AF9E271A68EAD7003397DD /* WifiBleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85AF9E261A68EAD7003397DD /* WifiBleViewController.m */; };
+		85E8E2561A5A712000B2C7DB /* fileDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 85E8E2551A5A712000B2C7DB /* fileDownload.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		85382AC91A4D438B001BEB87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85382AA11A4D438B001BEB87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85382AA81A4D438B001BEB87;
+			remoteInfo = AmbaRemoteCam;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		214FD0071B314A7B008717DA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		21663B841B69BD5D00DB52D8 /* AmbaRTSPPlayBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbaRTSPPlayBack.h; sourceTree = "<group>"; };
+		21663B851B69BD5D00DB52D8 /* AmbaRTSPPlayBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmbaRTSPPlayBack.m; sourceTree = "<group>"; };
+		219331D71AF869CE00582599 /* remoteCamiPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = remoteCamiPhone.storyboard; sourceTree = "<group>"; };
+		21BBDC7A1B73392000373CFE /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
+		21BBDC7B1B73392000373CFE /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
+		21BD47331BBBFDD600488FD8 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		21BD47351BBBFDEC00488FD8 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		21BD47371BBBFDF500488FD8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		85047A7D1A4D43F800F5B14D /* AmbaRemoteCamiPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AmbaRemoteCamiPad.storyboard; sourceTree = "<group>"; };
+		85047A7F1A4D4ABA00F5B14D /* bleScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bleScanViewController.h; sourceTree = "<group>"; };
+		85047A801A4D4ABA00F5B14D /* bleScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bleScanViewController.m; sourceTree = "<group>"; };
+		85047A841A4D5C4700F5B14D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		85047A861A4D5E2C00F5B14D /* ambaStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ambaStateMachine.h; sourceTree = "<group>"; };
+		85047A871A4D5E2C00F5B14D /* ambaStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ambaStateMachine.m; sourceTree = "<group>"; };
+		85047A891A4D661800F5B14D /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		850DB0841A50F65F0084233B /* serviceCharacteristicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serviceCharacteristicsViewController.h; sourceTree = "<group>"; };
+		850DB0851A50F65F0084233B /* serviceCharacteristicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = serviceCharacteristicsViewController.m; sourceTree = "<group>"; };
+		851594531A53AE0C002689D4 /* AmbaRemoteCam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AmbaRemoteCam.png; sourceTree = "<group>"; };
+		85382AA91A4D438B001BEB87 /* AmbaRemoteCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AmbaRemoteCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85382AAC1A4D438B001BEB87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		85382AAE1A4D438B001BEB87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		85382AB01A4D438B001BEB87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		85382AB41A4D438B001BEB87 /* AmbaRemoteCam-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmbaRemoteCam-Info.plist"; sourceTree = "<group>"; };
+		85382AB61A4D438B001BEB87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		85382AB81A4D438B001BEB87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		85382ABA1A4D438B001BEB87 /* AmbaRemoteCam-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AmbaRemoteCam-Prefix.pch"; sourceTree = "<group>"; };
+		85382ABB1A4D438B001BEB87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		85382ABC1A4D438B001BEB87 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		85382ABE1A4D438B001BEB87 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		85382AC41A4D438B001BEB87 /* AmbaRemoteCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbaRemoteCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85382AC51A4D438B001BEB87 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		85382ACD1A4D438B001BEB87 /* AmbaRemoteCamTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AmbaRemoteCamTests-Info.plist"; sourceTree = "<group>"; };
+		85382ACF1A4D438B001BEB87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		85382AD11A4D438B001BEB87 /* AmbaRemoteCamTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AmbaRemoteCamTests.m; sourceTree = "<group>"; };
+		854B8E931A4DA62300FFD081 /* wifiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wifiViewController.h; sourceTree = "<group>"; };
+		854B8E941A4DA62300FFD081 /* wifiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wifiViewController.m; sourceTree = "<group>"; };
+		8587ECD51AAEDFAF00BBD536 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		85A299AA1A7601E5008EA154 /* AMBACameraCommandsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMBACameraCommandsViewController.h; sourceTree = "<group>"; };
+		85A299AB1A76024B008EA154 /* AMBACameraCommandsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBACameraCommandsViewController.m; sourceTree = "<group>"; };
+		85A299AD1A7602B1008EA154 /* AMBALogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBALogViewController.h; sourceTree = "<group>"; };
+		85A299AE1A7602B1008EA154 /* AMBALogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBALogViewController.m; sourceTree = "<group>"; };
+		85A29ACB1A67739400724EB8 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		85A29ACD1A6773C000724EB8 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
+		85A29ACF1A67741300724EB8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		85A29B4B1A67751F00724EB8 /* avcodec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
+		85A29B4C1A67751F00724EB8 /* avfft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avfft.h; sourceTree = "<group>"; };
+		85A29B4D1A67751F00724EB8 /* dv_profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dv_profile.h; sourceTree = "<group>"; };
+		85A29B4E1A67751F00724EB8 /* dxva2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dxva2.h; sourceTree = "<group>"; };
+		85A29B4F1A67751F00724EB8 /* old_codec_ids.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = old_codec_ids.h; sourceTree = "<group>"; };
+		85A29B501A67751F00724EB8 /* vaapi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vaapi.h; sourceTree = "<group>"; };
+		85A29B511A67751F00724EB8 /* vda.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vda.h; sourceTree = "<group>"; };
+		85A29B521A67752000724EB8 /* vdpau.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vdpau.h; sourceTree = "<group>"; };
+		85A29B531A67752000724EB8 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		85A29B541A67752000724EB8 /* xvmc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xvmc.h; sourceTree = "<group>"; };
+		85A29B561A67752000724EB8 /* avdevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avdevice.h; sourceTree = "<group>"; };
+		85A29B571A67752000724EB8 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		85A29B591A67752000724EB8 /* asrc_abuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = asrc_abuffer.h; sourceTree = "<group>"; };
+		85A29B5A1A67752000724EB8 /* avcodec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
+		85A29B5B1A67752000724EB8 /* avfilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avfilter.h; sourceTree = "<group>"; };
+		85A29B5C1A67752000724EB8 /* avfiltergraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avfiltergraph.h; sourceTree = "<group>"; };
+		85A29B5D1A67752000724EB8 /* buffersink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffersink.h; sourceTree = "<group>"; };
+		85A29B5E1A67752000724EB8 /* buffersrc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffersrc.h; sourceTree = "<group>"; };
+		85A29B5F1A67752000724EB8 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		85A29B611A67752000724EB8 /* avformat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avformat.h; sourceTree = "<group>"; };
+		85A29B621A67752000724EB8 /* avio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avio.h; sourceTree = "<group>"; };
+		85A29B631A67752000724EB8 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		85A29B651A67752000724EB8 /* adler32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = adler32.h; sourceTree = "<group>"; };
+		85A29B661A67752000724EB8 /* aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		85A29B671A67752000724EB8 /* attributes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = attributes.h; sourceTree = "<group>"; };
+		85A29B681A67752000724EB8 /* audio_fifo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = audio_fifo.h; sourceTree = "<group>"; };
+		85A29B691A67752000724EB8 /* audioconvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = audioconvert.h; sourceTree = "<group>"; };
+		85A29B6A1A67752000724EB8 /* avassert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avassert.h; sourceTree = "<group>"; };
+		85A29B6B1A67752000724EB8 /* avconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avconfig.h; sourceTree = "<group>"; };
+		85A29B6C1A67752000724EB8 /* avstring.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avstring.h; sourceTree = "<group>"; };
+		85A29B6D1A67752000724EB8 /* avutil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avutil.h; sourceTree = "<group>"; };
+		85A29B6E1A67752000724EB8 /* base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+		85A29B6F1A67752000724EB8 /* blowfish.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blowfish.h; sourceTree = "<group>"; };
+		85A29B701A67752000724EB8 /* bprint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bprint.h; sourceTree = "<group>"; };
+		85A29B711A67752000724EB8 /* bswap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bswap.h; sourceTree = "<group>"; };
+		85A29B721A67752000724EB8 /* buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		85A29B731A67752000724EB8 /* channel_layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = channel_layout.h; sourceTree = "<group>"; };
+		85A29B741A67752000724EB8 /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		85A29B751A67752000724EB8 /* cpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
+		85A29B761A67752000724EB8 /* crc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crc.h; sourceTree = "<group>"; };
+		85A29B771A67752000724EB8 /* dict.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dict.h; sourceTree = "<group>"; };
+		85A29B781A67752000724EB8 /* display.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = display.h; sourceTree = "<group>"; };
+		85A29B791A67752000724EB8 /* downmix_info.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = downmix_info.h; sourceTree = "<group>"; };
+		85A29B7A1A67752000724EB8 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		85A29B7B1A67752000724EB8 /* eval.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = eval.h; sourceTree = "<group>"; };
+		85A29B7C1A67752000724EB8 /* ffversion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ffversion.h; sourceTree = "<group>"; };
+		85A29B7D1A67752000724EB8 /* fifo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fifo.h; sourceTree = "<group>"; };
+		85A29B7E1A67752000724EB8 /* file.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = file.h; sourceTree = "<group>"; };
+		85A29B7F1A67752000724EB8 /* frame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = frame.h; sourceTree = "<group>"; };
+		85A29B801A67752000724EB8 /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
+		85A29B811A67752000724EB8 /* hmac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		85A29B821A67752000724EB8 /* imgutils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgutils.h; sourceTree = "<group>"; };
+		85A29B831A67752000724EB8 /* intfloat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = intfloat.h; sourceTree = "<group>"; };
+		85A29B841A67752000724EB8 /* intfloat_readwrite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = intfloat_readwrite.h; sourceTree = "<group>"; };
+		85A29B851A67752000724EB8 /* intreadwrite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = intreadwrite.h; sourceTree = "<group>"; };
+		85A29B861A67752000724EB8 /* lfg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lfg.h; sourceTree = "<group>"; };
+		85A29B871A67752000724EB8 /* log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		85A29B881A67752000724EB8 /* lzo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lzo.h; sourceTree = "<group>"; };
+		85A29B891A67752000724EB8 /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
+		85A29B8A1A67752000724EB8 /* mathematics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mathematics.h; sourceTree = "<group>"; };
+		85A29B8B1A67752000724EB8 /* md5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		85A29B8C1A67752000724EB8 /* mem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mem.h; sourceTree = "<group>"; };
+		85A29B8D1A67752000724EB8 /* motion_vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = motion_vector.h; sourceTree = "<group>"; };
+		85A29B8E1A67752000724EB8 /* murmur3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = murmur3.h; sourceTree = "<group>"; };
+		85A29B8F1A67752000724EB8 /* old_pix_fmts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = old_pix_fmts.h; sourceTree = "<group>"; };
+		85A29B901A67752000724EB8 /* opt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opt.h; sourceTree = "<group>"; };
+		85A29B911A67752000724EB8 /* parseutils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parseutils.h; sourceTree = "<group>"; };
+		85A29B921A67752000724EB8 /* pixdesc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pixdesc.h; sourceTree = "<group>"; };
+		85A29B931A67752000724EB8 /* pixelutils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pixelutils.h; sourceTree = "<group>"; };
+		85A29B941A67752000724EB8 /* pixfmt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pixfmt.h; sourceTree = "<group>"; };
+		85A29B951A67752000724EB8 /* random_seed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = random_seed.h; sourceTree = "<group>"; };
+		85A29B961A67752000724EB8 /* rational.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rational.h; sourceTree = "<group>"; };
+		85A29B971A67752000724EB8 /* replaygain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = replaygain.h; sourceTree = "<group>"; };
+		85A29B981A67752000724EB8 /* ripemd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ripemd.h; sourceTree = "<group>"; };
+		85A29B991A67752000724EB8 /* samplefmt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = samplefmt.h; sourceTree = "<group>"; };
+		85A29B9A1A67752000724EB8 /* sha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha.h; sourceTree = "<group>"; };
+		85A29B9B1A67752000724EB8 /* sha512.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha512.h; sourceTree = "<group>"; };
+		85A29B9C1A67752000724EB8 /* stereo3d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stereo3d.h; sourceTree = "<group>"; };
+		85A29B9D1A67752000724EB8 /* threadmessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = threadmessage.h; sourceTree = "<group>"; };
+		85A29B9E1A67752000724EB8 /* time.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = time.h; sourceTree = "<group>"; };
+		85A29B9F1A67752000724EB8 /* timecode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timecode.h; sourceTree = "<group>"; };
+		85A29BA01A67752000724EB8 /* timestamp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timestamp.h; sourceTree = "<group>"; };
+		85A29BA11A67752000724EB8 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		85A29BA21A67752000724EB8 /* xtea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xtea.h; sourceTree = "<group>"; };
+		85A29BA41A67752000724EB8 /* swresample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swresample.h; sourceTree = "<group>"; };
+		85A29BA51A67752000724EB8 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		85A29BA71A67752000724EB8 /* swscale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swscale.h; sourceTree = "<group>"; };
+		85A29BA81A67752000724EB8 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		85A29BAA1A67752000724EB8 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavcodec.a; sourceTree = "<group>"; };
+		85A29BAB1A67752000724EB8 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavdevice.a; sourceTree = "<group>"; };
+		85A29BAC1A67752000724EB8 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavfilter.a; sourceTree = "<group>"; };
+		85A29BAD1A67752000724EB8 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavformat.a; sourceTree = "<group>"; };
+		85A29BAE1A67752000724EB8 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
+		85A29BAF1A67752000724EB8 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
+		85A29BB01A67752000724EB8 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
+		85A29BB11A67754300724EB8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		85A29BB31A67755B00724EB8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		85A29BB51A67756400724EB8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		85A29BB71A67756F00724EB8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		85A29BB91A67757700724EB8 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		85A29BBB1A67757F00724EB8 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		85A29BBD1A67765000724EB8 /* AmbaViewFinderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbaViewFinderViewController.h; sourceTree = "<group>"; };
+		85A29BBE1A67765000724EB8 /* AmbaViewFinderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmbaViewFinderViewController.m; sourceTree = "<group>"; };
+		85A29BC01A67793D00724EB8 /* AmbaRTSPPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbaRTSPPlayer.h; sourceTree = "<group>"; };
+		85A29BC11A67793D00724EB8 /* AmbaRTSPPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmbaRTSPPlayer.m; sourceTree = "<group>"; };
+		85A399CE1A8AF730004FEF3D /* fileUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileUpload.h; sourceTree = "<group>"; };
+		85A399CF1A8AF730004FEF3D /* fileUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileUpload.m; sourceTree = "<group>"; };
+		85A399D11A8B2EC2004FEF3D /* orange_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange_button.png; sourceTree = "<group>"; };
+		85AF9E211A68B35A003397DD /* radio-button-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio-button-off.png"; sourceTree = "<group>"; };
+		85AF9E231A68B361003397DD /* radio-button-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio-button-on.png"; sourceTree = "<group>"; };
+		85AF9E251A68EAD7003397DD /* WifiBleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiBleViewController.h; sourceTree = "<group>"; };
+		85AF9E261A68EAD7003397DD /* WifiBleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiBleViewController.m; sourceTree = "<group>"; };
+		85E8E2541A5A712000B2C7DB /* fileDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileDownload.h; sourceTree = "<group>"; };
+		85E8E2551A5A712000B2C7DB /* fileDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileDownload.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		85382AA61A4D438B001BEB87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21BD47381BBBFDF500488FD8 /* OpenGLES.framework in Frameworks */,
+				21BD47361BBBFDEC00488FD8 /* Accelerate.framework in Frameworks */,
+				21BD47341BBBFDD600488FD8 /* CoreAudio.framework in Frameworks */,
+				214FD0081B314A7B008717DA /* MediaPlayer.framework in Frameworks */,
+				85A29BC31A677EDD00724EB8 /* libavcodec.a in Frameworks */,
+				85A29BC41A677EDD00724EB8 /* libavdevice.a in Frameworks */,
+				85A29BC51A677EDD00724EB8 /* libavfilter.a in Frameworks */,
+				85A29BC61A677EDD00724EB8 /* libavformat.a in Frameworks */,
+				85A29BC71A677EDD00724EB8 /* libavutil.a in Frameworks */,
+				85A29BC81A677EDD00724EB8 /* libswresample.a in Frameworks */,
+				85A29BC91A677EDD00724EB8 /* libswscale.a in Frameworks */,
+				85A29BBC1A67757F00724EB8 /* CoreVideo.framework in Frameworks */,
+				85A29BBA1A67757700724EB8 /* CoreImage.framework in Frameworks */,
+				85A29BB81A67756F00724EB8 /* CoreMedia.framework in Frameworks */,
+				85A29BB61A67756400724EB8 /* AudioToolbox.framework in Frameworks */,
+				85A29BB41A67755B00724EB8 /* QuartzCore.framework in Frameworks */,
+				85382AB11A4D438B001BEB87 /* UIKit.framework in Frameworks */,
+				85382AAF1A4D438B001BEB87 /* CoreGraphics.framework in Frameworks */,
+				85A29BB21A67754300724EB8 /* AVFoundation.framework in Frameworks */,
+				85A29AD01A67741300724EB8 /* libz.dylib in Frameworks */,
+				85A29ACE1A6773C000724EB8 /* libbz2.dylib in Frameworks */,
+				85A29ACC1A67739400724EB8 /* libiconv.dylib in Frameworks */,
+				85047A851A4D5C4700F5B14D /* CoreBluetooth.framework in Frameworks */,
+				85382AAD1A4D438B001BEB87 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85382AC11A4D438B001BEB87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85382AC61A4D438B001BEB87 /* XCTest.framework in Frameworks */,
+				85382AC81A4D438B001BEB87 /* UIKit.framework in Frameworks */,
+				85382AC71A4D438B001BEB87 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		85382AA01A4D438B001BEB87 = {
+			isa = PBXGroup;
+			children = (
+				85382AB21A4D438B001BEB87 /* AmbaRemoteCam */,
+				85382ACB1A4D438B001BEB87 /* AmbaRemoteCamTests */,
+				85382AAB1A4D438B001BEB87 /* Frameworks */,
+				85382AAA1A4D438B001BEB87 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		85382AAA1A4D438B001BEB87 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85382AA91A4D438B001BEB87 /* AmbaRemoteCam.app */,
+				85382AC41A4D438B001BEB87 /* AmbaRemoteCamTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85382AAB1A4D438B001BEB87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21BD47371BBBFDF500488FD8 /* OpenGLES.framework */,
+				21BD47351BBBFDEC00488FD8 /* Accelerate.framework */,
+				21BD47331BBBFDD600488FD8 /* CoreAudio.framework */,
+				214FD0071B314A7B008717DA /* MediaPlayer.framework */,
+				85A29ACF1A67741300724EB8 /* libz.dylib */,
+				85A29ACD1A6773C000724EB8 /* libbz2.dylib */,
+				85A29ACB1A67739400724EB8 /* libiconv.dylib */,
+				85A29B481A67751F00724EB8 /* FFmpeg-iOS */,
+				85A29BBB1A67757F00724EB8 /* CoreVideo.framework */,
+				85A29BB91A67757700724EB8 /* CoreImage.framework */,
+				85A29BB71A67756F00724EB8 /* CoreMedia.framework */,
+				85A29BB51A67756400724EB8 /* AudioToolbox.framework */,
+				85A29BB31A67755B00724EB8 /* QuartzCore.framework */,
+				85A29BB11A67754300724EB8 /* AVFoundation.framework */,
+				85047A841A4D5C4700F5B14D /* CoreBluetooth.framework */,
+				85382AAC1A4D438B001BEB87 /* Foundation.framework */,
+				85382AAE1A4D438B001BEB87 /* CoreGraphics.framework */,
+				85382AB01A4D438B001BEB87 /* UIKit.framework */,
+				85382AC51A4D438B001BEB87 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		85382AB21A4D438B001BEB87 /* AmbaRemoteCam */ = {
+			isa = PBXGroup;
+			children = (
+				85047A891A4D661800F5B14D /* constants.h */,
+				85382ABB1A4D438B001BEB87 /* AppDelegate.h */,
+				85382ABC1A4D438B001BEB87 /* AppDelegate.m */,
+				85047A7F1A4D4ABA00F5B14D /* bleScanViewController.h */,
+				85047A801A4D4ABA00F5B14D /* bleScanViewController.m */,
+				85AF9E251A68EAD7003397DD /* WifiBleViewController.h */,
+				85AF9E261A68EAD7003397DD /* WifiBleViewController.m */,
+				850DB0841A50F65F0084233B /* serviceCharacteristicsViewController.h */,
+				850DB0851A50F65F0084233B /* serviceCharacteristicsViewController.m */,
+				85047A861A4D5E2C00F5B14D /* ambaStateMachine.h */,
+				85047A871A4D5E2C00F5B14D /* ambaStateMachine.m */,
+				85E8E2541A5A712000B2C7DB /* fileDownload.h */,
+				85E8E2551A5A712000B2C7DB /* fileDownload.m */,
+				85A399CE1A8AF730004FEF3D /* fileUpload.h */,
+				85A399CF1A8AF730004FEF3D /* fileUpload.m */,
+				85A29BC01A67793D00724EB8 /* AmbaRTSPPlayer.h */,
+				85A29BC11A67793D00724EB8 /* AmbaRTSPPlayer.m */,
+				21BBDC7A1B73392000373CFE /* AudioStreamer.h */,
+				21BBDC7B1B73392000373CFE /* AudioStreamer.m */,
+				85047A7D1A4D43F800F5B14D /* AmbaRemoteCamiPad.storyboard */,
+				219331D71AF869CE00582599 /* remoteCamiPhone.storyboard */,
+				21663B841B69BD5D00DB52D8 /* AmbaRTSPPlayBack.h */,
+				21663B851B69BD5D00DB52D8 /* AmbaRTSPPlayBack.m */,
+				854B8E931A4DA62300FFD081 /* wifiViewController.h */,
+				854B8E941A4DA62300FFD081 /* wifiViewController.m */,
+				85A299AA1A7601E5008EA154 /* AMBACameraCommandsViewController.h */,
+				85A299AB1A76024B008EA154 /* AMBACameraCommandsViewController.m */,
+				85A29BBD1A67765000724EB8 /* AmbaViewFinderViewController.h */,
+				85A29BBE1A67765000724EB8 /* AmbaViewFinderViewController.m */,
+				85A299AE1A7602B1008EA154 /* AMBALogViewController.m */,
+				85A299AD1A7602B1008EA154 /* AMBALogViewController.h */,
+				85382ABE1A4D438B001BEB87 /* Images.xcassets */,
+				85382AB31A4D438B001BEB87 /* Supporting Files */,
+			);
+			path = AmbaRemoteCam;
+			sourceTree = "<group>";
+		};
+		85382AB31A4D438B001BEB87 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				851594531A53AE0C002689D4 /* AmbaRemoteCam.png */,
+				8587ECD51AAEDFAF00BBD536 /* button.png */,
+				85A399D11A8B2EC2004FEF3D /* orange_button.png */,
+				85AF9E211A68B35A003397DD /* radio-button-off.png */,
+				85AF9E231A68B361003397DD /* radio-button-on.png */,
+				85382AB41A4D438B001BEB87 /* AmbaRemoteCam-Info.plist */,
+				85382AB51A4D438B001BEB87 /* InfoPlist.strings */,
+				85382AB81A4D438B001BEB87 /* main.m */,
+				85382ABA1A4D438B001BEB87 /* AmbaRemoteCam-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		85382ACB1A4D438B001BEB87 /* AmbaRemoteCamTests */ = {
+			isa = PBXGroup;
+			children = (
+				85382AD11A4D438B001BEB87 /* AmbaRemoteCamTests.m */,
+				85382ACC1A4D438B001BEB87 /* Supporting Files */,
+			);
+			path = AmbaRemoteCamTests;
+			sourceTree = "<group>";
+		};
+		85382ACC1A4D438B001BEB87 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				85382ACD1A4D438B001BEB87 /* AmbaRemoteCamTests-Info.plist */,
+				85382ACE1A4D438B001BEB87 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		85A29B481A67751F00724EB8 /* FFmpeg-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				85A29B491A67751F00724EB8 /* include */,
+				85A29BA91A67752000724EB8 /* lib */,
+			);
+			name = "FFmpeg-iOS";
+			path = "FFMPEG_External/FFmpeg-iOS";
+			sourceTree = "<group>";
+		};
+		85A29B491A67751F00724EB8 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				85A29B4A1A67751F00724EB8 /* libavcodec */,
+				85A29B551A67752000724EB8 /* libavdevice */,
+				85A29B581A67752000724EB8 /* libavfilter */,
+				85A29B601A67752000724EB8 /* libavformat */,
+				85A29B641A67752000724EB8 /* libavutil */,
+				85A29BA31A67752000724EB8 /* libswresample */,
+				85A29BA61A67752000724EB8 /* libswscale */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		85A29B4A1A67751F00724EB8 /* libavcodec */ = {
+			isa = PBXGroup;
+			children = (
+				85A29B4B1A67751F00724EB8 /* avcodec.h */,
+				85A29B4C1A67751F00724EB8 /* avfft.h */,
+				85A29B4D1A67751F00724EB8 /* dv_profile.h */,
+				85A29B4E1A67751F00724EB8 /* dxva2.h */,
+				85A29B4F1A67751F00724EB8 /* old_codec_ids.h */,
+				85A29B501A67751F00724EB8 /* vaapi.h */,
+				85A29B511A67751F00724EB8 /* vda.h */,
+				85A29B521A67752000724EB8 /* vdpau.h */,
+				85A29B531A67752000724EB8 /* version.h */,
+				85A29B541A67752000724EB8 /* xvmc.h */,
+			);
+			path = libavcodec;
+			sourceTree = "<group>";
+		};
+		85A29B551A67752000724EB8 /* libavdevice */ = {
+			isa = PBXGroup;
+			children = (
+				85A29B561A67752000724EB8 /* avdevice.h */,
+				85A29B571A67752000724EB8 /* version.h */,
+			);
+			path = libavdevice;
+			sourceTree = "<group>";
+		};
+		85A29B581A67752000724EB8 /* libavfilter */ = {
+			isa = PBXGroup;
+			children = (
+				85A29B591A67752000724EB8 /* asrc_abuffer.h */,
+				85A29B5A1A67752000724EB8 /* avcodec.h */,
+				85A29B5B1A67752000724EB8 /* avfilter.h */,
+				85A29B5C1A67752000724EB8 /* avfiltergraph.h */,
+				85A29B5D1A67752000724EB8 /* buffersink.h */,
+				85A29B5E1A67752000724EB8 /* buffersrc.h */,
+				85A29B5F1A67752000724EB8 /* version.h */,
+			);
+			path = libavfilter;
+			sourceTree = "<group>";
+		};
+		85A29B601A67752000724EB8 /* libavformat */ = {
+			isa = PBXGroup;
+			children = (
+				85A29B611A67752000724EB8 /* avformat.h */,
+				85A29B621A67752000724EB8 /* avio.h */,
+				85A29B631A67752000724EB8 /* version.h */,
+			);
+			path = libavformat;
+			sourceTree = "<group>";
+		};
+		85A29B641A67752000724EB8 /* libavutil */ = {
+			isa = PBXGroup;
+			children = (
+				85A29B651A67752000724EB8 /* adler32.h */,
+				85A29B661A67752000724EB8 /* aes.h */,
+				85A29B671A67752000724EB8 /* attributes.h */,
+				85A29B681A67752000724EB8 /* audio_fifo.h */,
+				85A29B691A67752000724EB8 /* audioconvert.h */,
+				85A29B6A1A67752000724EB8 /* avassert.h */,
+				85A29B6B1A67752000724EB8 /* avconfig.h */,
+				85A29B6C1A67752000724EB8 /* avstring.h */,
+				85A29B6D1A67752000724EB8 /* avutil.h */,
+				85A29B6E1A67752000724EB8 /* base64.h */,
+				85A29B6F1A67752000724EB8 /* blowfish.h */,
+				85A29B701A67752000724EB8 /* bprint.h */,
+				85A29B711A67752000724EB8 /* bswap.h */,
+				85A29B721A67752000724EB8 /* buffer.h */,
+				85A29B731A67752000724EB8 /* channel_layout.h */,
+				85A29B741A67752000724EB8 /* common.h */,
+				85A29B751A67752000724EB8 /* cpu.h */,
+				85A29B761A67752000724EB8 /* crc.h */,
+				85A29B771A67752000724EB8 /* dict.h */,
+				85A29B781A67752000724EB8 /* display.h */,
+				85A29B791A67752000724EB8 /* downmix_info.h */,
+				85A29B7A1A67752000724EB8 /* error.h */,
+				85A29B7B1A67752000724EB8 /* eval.h */,
+				85A29B7C1A67752000724EB8 /* ffversion.h */,
+				85A29B7D1A67752000724EB8 /* fifo.h */,
+				85A29B7E1A67752000724EB8 /* file.h */,
+				85A29B7F1A67752000724EB8 /* frame.h */,
+				85A29B801A67752000724EB8 /* hash.h */,
+				85A29B811A67752000724EB8 /* hmac.h */,
+				85A29B821A67752000724EB8 /* imgutils.h */,
+				85A29B831A67752000724EB8 /* intfloat.h */,
+				85A29B841A67752000724EB8 /* intfloat_readwrite.h */,
+				85A29B851A67752000724EB8 /* intreadwrite.h */,
+				85A29B861A67752000724EB8 /* lfg.h */,
+				85A29B871A67752000724EB8 /* log.h */,
+				85A29B881A67752000724EB8 /* lzo.h */,
+				85A29B891A67752000724EB8 /* macros.h */,
+				85A29B8A1A67752000724EB8 /* mathematics.h */,
+				85A29B8B1A67752000724EB8 /* md5.h */,
+				85A29B8C1A67752000724EB8 /* mem.h */,
+				85A29B8D1A67752000724EB8 /* motion_vector.h */,
+				85A29B8E1A67752000724EB8 /* murmur3.h */,
+				85A29B8F1A67752000724EB8 /* old_pix_fmts.h */,
+				85A29B901A67752000724EB8 /* opt.h */,
+				85A29B911A67752000724EB8 /* parseutils.h */,
+				85A29B921A67752000724EB8 /* pixdesc.h */,
+				85A29B931A67752000724EB8 /* pixelutils.h */,
+				85A29B941A67752000724EB8 /* pixfmt.h */,
+				85A29B951A67752000724EB8 /* random_seed.h */,
+				85A29B961A67752000724EB8 /* rational.h */,
+				85A29B971A67752000724EB8 /* replaygain.h */,
+				85A29B981A67752000724EB8 /* ripemd.h */,
+				85A29B991A67752000724EB8 /* samplefmt.h */,
+				85A29B9A1A67752000724EB8 /* sha.h */,
+				85A29B9B1A67752000724EB8 /* sha512.h */,
+				85A29B9C1A67752000724EB8 /* stereo3d.h */,
+				85A29B9D1A67752000724EB8 /* threadmessage.h */,
+				85A29B9E1A67752000724EB8 /* time.h */,
+				85A29B9F1A67752000724EB8 /* timecode.h */,
+				85A29BA01A67752000724EB8 /* timestamp.h */,
+				85A29BA11A67752000724EB8 /* version.h */,
+				85A29BA21A67752000724EB8 /* xtea.h */,
+			);
+			path = libavutil;
+			sourceTree = "<group>";
+		};
+		85A29BA31A67752000724EB8 /* libswresample */ = {
+			isa = PBXGroup;
+			children = (
+				85A29BA41A67752000724EB8 /* swresample.h */,
+				85A29BA51A67752000724EB8 /* version.h */,
+			);
+			path = libswresample;
+			sourceTree = "<group>";
+		};
+		85A29BA61A67752000724EB8 /* libswscale */ = {
+			isa = PBXGroup;
+			children = (
+				85A29BA71A67752000724EB8 /* swscale.h */,
+				85A29BA81A67752000724EB8 /* version.h */,
+			);
+			path = libswscale;
+			sourceTree = "<group>";
+		};
+		85A29BA91A67752000724EB8 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				85A29BAA1A67752000724EB8 /* libavcodec.a */,
+				85A29BAB1A67752000724EB8 /* libavdevice.a */,
+				85A29BAC1A67752000724EB8 /* libavfilter.a */,
+				85A29BAD1A67752000724EB8 /* libavformat.a */,
+				85A29BAE1A67752000724EB8 /* libavutil.a */,
+				85A29BAF1A67752000724EB8 /* libswresample.a */,
+				85A29BB01A67752000724EB8 /* libswscale.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		85382AA81A4D438B001BEB87 /* AmbaRemoteCam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85382AD51A4D438B001BEB87 /* Build configuration list for PBXNativeTarget "AmbaRemoteCam" */;
+			buildPhases = (
+				85382AA51A4D438B001BEB87 /* Sources */,
+				85382AA61A4D438B001BEB87 /* Frameworks */,
+				85382AA71A4D438B001BEB87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AmbaRemoteCam;
+			productName = AmbaRemoteCam;
+			productReference = 85382AA91A4D438B001BEB87 /* AmbaRemoteCam.app */;
+			productType = "com.apple.product-type.application";
+		};
+		85382AC31A4D438B001BEB87 /* AmbaRemoteCamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85382AD81A4D438B001BEB87 /* Build configuration list for PBXNativeTarget "AmbaRemoteCamTests" */;
+			buildPhases = (
+				85382AC01A4D438B001BEB87 /* Sources */,
+				85382AC11A4D438B001BEB87 /* Frameworks */,
+				85382AC21A4D438B001BEB87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85382ACA1A4D438B001BEB87 /* PBXTargetDependency */,
+			);
+			name = AmbaRemoteCamTests;
+			productName = AmbaRemoteCamTests;
+			productReference = 85382AC41A4D438B001BEB87 /* AmbaRemoteCamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		85382AA11A4D438B001BEB87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = Ambarella;
+				TargetAttributes = {
+					85382AA81A4D438B001BEB87 = {
+						DevelopmentTeam = 6C3S2B3BGX;
+					};
+					85382AC31A4D438B001BEB87 = {
+						TestTargetID = 85382AA81A4D438B001BEB87;
+					};
+				};
+			};
+			buildConfigurationList = 85382AA41A4D438B001BEB87 /* Build configuration list for PBXProject "AmbaRemoteCam" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 85382AA01A4D438B001BEB87;
+			productRefGroup = 85382AAA1A4D438B001BEB87 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				85382AA81A4D438B001BEB87 /* AmbaRemoteCam */,
+				85382AC31A4D438B001BEB87 /* AmbaRemoteCamTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85382AA71A4D438B001BEB87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85047A7E1A4D43F800F5B14D /* AmbaRemoteCamiPad.storyboard in Resources */,
+				8587ECD61AAEDFAF00BBD536 /* button.png in Resources */,
+				85382AB71A4D438B001BEB87 /* InfoPlist.strings in Resources */,
+				219331D81AF869CE00582599 /* remoteCamiPhone.storyboard in Resources */,
+				85A399D21A8B2EC2004FEF3D /* orange_button.png in Resources */,
+				851594541A53AE0C002689D4 /* AmbaRemoteCam.png in Resources */,
+				85382ABF1A4D438B001BEB87 /* Images.xcassets in Resources */,
+				85AF9E221A68B35A003397DD /* radio-button-off.png in Resources */,
+				85AF9E241A68B361003397DD /* radio-button-on.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85382AC21A4D438B001BEB87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85382AD01A4D438B001BEB87 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85382AA51A4D438B001BEB87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				854B8E951A4DA62300FFD081 /* wifiViewController.m in Sources */,
+				85A29BC21A67793D00724EB8 /* AmbaRTSPPlayer.m in Sources */,
+				85047A881A4D5E2C00F5B14D /* ambaStateMachine.m in Sources */,
+				85A299AF1A7602B1008EA154 /* AMBALogViewController.m in Sources */,
+				85AF9E271A68EAD7003397DD /* WifiBleViewController.m in Sources */,
+				85A299AC1A76024B008EA154 /* AMBACameraCommandsViewController.m in Sources */,
+				85047A811A4D4ABA00F5B14D /* bleScanViewController.m in Sources */,
+				85A399D01A8AF730004FEF3D /* fileUpload.m in Sources */,
+				850DB0861A50F65F0084233B /* serviceCharacteristicsViewController.m in Sources */,
+				85A29BBF1A67765000724EB8 /* AmbaViewFinderViewController.m in Sources */,
+				21663B861B69BD5D00DB52D8 /* AmbaRTSPPlayBack.m in Sources */,
+				21BBDC7C1B73392000373CFE /* AudioStreamer.m in Sources */,
+				85382ABD1A4D438B001BEB87 /* AppDelegate.m in Sources */,
+				85382AB91A4D438B001BEB87 /* main.m in Sources */,
+				85E8E2561A5A712000B2C7DB /* fileDownload.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85382AC01A4D438B001BEB87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85382AD21A4D438B001BEB87 /* AmbaRemoteCamTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		85382ACA1A4D438B001BEB87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85382AA81A4D438B001BEB87 /* AmbaRemoteCam */;
+			targetProxy = 85382AC91A4D438B001BEB87 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		85382AB51A4D438B001BEB87 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85382AB61A4D438B001BEB87 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		85382ACE1A4D438B001BEB87 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85382ACF1A4D438B001BEB87 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		85382AD31A4D438B001BEB87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		85382AD41A4D438B001BEB87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		85382AD61A4D438B001BEB87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6C3S2B3BGX;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmbaRemoteCam/AmbaRemoteCam-Prefix.pch";
+				INFOPLIST_FILE = "AmbaRemoteCam/AmbaRemoteCam-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FFMPEG_External/FFmpeg-iOS/lib",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TestAppIDs.-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		85382AD71A4D438B001BEB87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6C3S2B3BGX;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmbaRemoteCam/AmbaRemoteCam-Prefix.pch";
+				INFOPLIST_FILE = "AmbaRemoteCam/AmbaRemoteCam-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FFMPEG_External/FFmpeg-iOS/lib",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TestAppIDs.-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		85382AD91A4D438B001BEB87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AmbaRemoteCam.app/AmbaRemoteCam";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmbaRemoteCam/AmbaRemoteCam-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AmbaRemoteCamTests/AmbaRemoteCamTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		85382ADA1A4D438B001BEB87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AmbaRemoteCam.app/AmbaRemoteCam";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AmbaRemoteCam/AmbaRemoteCam-Prefix.pch";
+				INFOPLIST_FILE = "AmbaRemoteCamTests/AmbaRemoteCamTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		85382AA41A4D438B001BEB87 /* Build configuration list for PBXProject "AmbaRemoteCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85382AD31A4D438B001BEB87 /* Debug */,
+				85382AD41A4D438B001BEB87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85382AD51A4D438B001BEB87 /* Build configuration list for PBXNativeTarget "AmbaRemoteCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85382AD61A4D438B001BEB87 /* Debug */,
+				85382AD71A4D438B001BEB87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85382AD81A4D438B001BEB87 /* Build configuration list for PBXNativeTarget "AmbaRemoteCamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85382AD91A4D438B001BEB87 /* Debug */,
+				85382ADA1A4D438B001BEB87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 85382AA11A4D438B001BEB87 /* Project object */;
+}
