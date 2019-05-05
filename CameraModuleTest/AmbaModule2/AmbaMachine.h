@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)currentSettingStatus:(ReturnBlock)block;
 - (void)formatSDCard:(ReturnBlock)block;
 - (void)listAllFiles:(ReturnBlock)block;
+- (void)queryCmdValueList:(NSString *)cmdTitle andReturnBlock:(ReturnBlock)block;
 
 @end
 

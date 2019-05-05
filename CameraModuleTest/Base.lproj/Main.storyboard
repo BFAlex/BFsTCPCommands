@@ -43,7 +43,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="Vmf-nj-jCc"/>
                                 </constraints>
-                                <state key="normal" title="Setting"/>
+                                <state key="normal" title="设置"/>
                                 <connections>
                                     <action selector="actionSettingBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dnu-JW-vAb"/>
                                 </connections>
@@ -118,6 +118,39 @@
                                     <action selector="actionListAllFiles:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7WQ-k4-hHp"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcz-dV-EPJ">
+                                <rect key="frame" x="16" y="160" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="oOP-vL-qYu"/>
+                                    <constraint firstAttribute="width" constant="94" id="yPQ-U7-Ai2"/>
+                                </constraints>
+                                <state key="normal" title="视频分辨率"/>
+                                <connections>
+                                    <action selector="actionListOfVideoResolutionValues:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gsz-UE-DZS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCc-9S-Mh9">
+                                <rect key="frame" x="114" y="160" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="9fe-ap-dRu"/>
+                                    <constraint firstAttribute="height" constant="36" id="BKT-Wu-H4J"/>
+                                </constraints>
+                                <state key="normal" title="视频编码"/>
+                                <connections>
+                                    <action selector="actionListOfVideoCodingFormatValues:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oqM-Y9-gv9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FwP-yF-8je">
+                                <rect key="frame" x="219" y="160" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="1Dd-rB-98f"/>
+                                    <constraint firstAttribute="height" constant="36" id="Q2f-e6-A2F"/>
+                                </constraints>
+                                <state key="normal" title="录制质量"/>
+                                <connections>
+                                    <action selector="actionListOfVideoQualityValues:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zQp-Ba-P4D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -129,22 +162,28 @@
                             <constraint firstItem="btD-pq-kok" firstAttribute="leading" secondItem="bVh-gi-5tM" secondAttribute="leading" id="BGe-tx-xPn"/>
                             <constraint firstItem="Isc-B1-YL0" firstAttribute="top" secondItem="btD-pq-kok" secondAttribute="top" id="Dij-X2-0t6"/>
                             <constraint firstItem="6YZ-Ut-r5m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Dy8-lU-KKM"/>
+                            <constraint firstItem="iCc-9S-Mh9" firstAttribute="top" secondItem="j13-GW-0OM" secondAttribute="bottom" constant="8" id="Eyh-Lq-ffX"/>
                             <constraint firstItem="2CU-ir-9I6" firstAttribute="width" secondItem="btD-pq-kok" secondAttribute="width" id="Ggy-HJ-3XZ"/>
                             <constraint firstItem="RaQ-A4-NHP" firstAttribute="width" secondItem="Isc-B1-YL0" secondAttribute="width" id="IV7-51-cjX"/>
                             <constraint firstItem="j13-GW-0OM" firstAttribute="top" secondItem="2CU-ir-9I6" secondAttribute="top" id="MfI-Xa-vrg"/>
                             <constraint firstItem="Isc-B1-YL0" firstAttribute="leading" secondItem="btD-pq-kok" secondAttribute="trailing" constant="8" id="O7p-PV-twY"/>
+                            <constraint firstItem="FwP-yF-8je" firstAttribute="top" secondItem="J4I-Ue-FYj" secondAttribute="bottom" constant="8" id="Oh8-Nv-bkq"/>
                             <constraint firstItem="J4I-Ue-FYj" firstAttribute="top" secondItem="RaQ-A4-NHP" secondAttribute="bottom" constant="8" id="QQW-9a-VBz"/>
                             <constraint firstItem="Dfl-sA-p6C" firstAttribute="width" secondItem="5Dj-dn-OKT" secondAttribute="width" id="SX4-4f-mCZ"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="width" secondItem="bVh-gi-5tM" secondAttribute="width" id="Tyk-Fj-OaQ"/>
                             <constraint firstItem="2CU-ir-9I6" firstAttribute="top" secondItem="btD-pq-kok" secondAttribute="bottom" constant="8" id="UZS-XL-BSL"/>
                             <constraint firstItem="bVh-gi-5tM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XLK-Vr-AtY"/>
                             <constraint firstItem="2CU-ir-9I6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="YNL-dX-Uih"/>
+                            <constraint firstItem="Zcz-dV-EPJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="aBm-MX-H77"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="top" secondItem="bVh-gi-5tM" secondAttribute="top" id="aMs-0K-nWl"/>
                             <constraint firstItem="Dfl-sA-p6C" firstAttribute="top" secondItem="5Dj-dn-OKT" secondAttribute="top" id="bRy-tY-XpM"/>
                             <constraint firstItem="btD-pq-kok" firstAttribute="top" secondItem="bVh-gi-5tM" secondAttribute="bottom" constant="8" id="eF3-1v-7qQ"/>
                             <constraint firstItem="Isc-B1-YL0" firstAttribute="width" secondItem="btD-pq-kok" secondAttribute="width" id="fPn-uO-Kjv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6YZ-Ut-r5m" secondAttribute="bottom" constant="20" id="h8y-7P-025"/>
                             <constraint firstItem="bVh-gi-5tM" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="hcc-Sp-sbO"/>
+                            <constraint firstItem="Zcz-dV-EPJ" firstAttribute="top" secondItem="2CU-ir-9I6" secondAttribute="bottom" constant="8" id="kyi-Eh-dU4"/>
+                            <constraint firstItem="iCc-9S-Mh9" firstAttribute="leading" secondItem="Zcz-dV-EPJ" secondAttribute="trailing" constant="4" id="mAm-bP-hEw"/>
+                            <constraint firstItem="FwP-yF-8je" firstAttribute="leading" secondItem="iCc-9S-Mh9" secondAttribute="trailing" constant="11" id="pkW-F8-hpp"/>
                             <constraint firstItem="j13-GW-0OM" firstAttribute="leading" secondItem="2CU-ir-9I6" secondAttribute="trailing" constant="8" id="rsO-OR-p0i"/>
                             <constraint firstItem="btD-pq-kok" firstAttribute="width" secondItem="bVh-gi-5tM" secondAttribute="width" id="t0t-T2-1gU"/>
                             <constraint firstItem="RaQ-A4-NHP" firstAttribute="top" secondItem="Isc-B1-YL0" secondAttribute="top" id="wVC-0V-doL"/>

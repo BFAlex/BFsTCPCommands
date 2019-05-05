@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BFSOrderPriority orderPrority;
 @property (nonatomic, assign) int messageId;
+@property (nonatomic, strong) NSString *param;
 @property (nonatomic, strong) NSString *curCommand;
 @property (nonatomic, copy) ItemTaskBlock taskBlock;
 @property (nonatomic, copy) ReturnBlock returnBlock;

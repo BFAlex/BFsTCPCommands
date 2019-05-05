@@ -516,6 +516,10 @@ unsigned int selectedRowIndexNumber;
     self.returnStatusLabel.text = @"Change Folder:";
     //NSLog( @"Change to Folder : %@", self.changeDirectory.text);
     [[ambaStateMachine getInstance] cameraChangeToFolder: self.changeDirectory.text];
+    
+    for (UIView *subView in self.view.subviews) {
+        [subView resignFirstResponder];
+    }
 }
 
 - (IBAction)getMediaInfo:(id)sender {// :(NSString *)textInputVal {

@@ -221,14 +221,15 @@ static dispatch_once_t onceToken;
     AmbaCommand *command = [AmbaCommand command];
     command.curCommand = startSessionCmd;
     command.messageId = startSessionMsgId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
-        id commandData = [self configCommandData:startSessionMsgId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:startSessionMsgId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
-    
-//    self.curCommand = command;
-//    command.taskBlock();
+    //    self.curCommand = command;
+    //    command.taskBlock();
     [self addOrder:command];
 }
 
@@ -238,15 +239,14 @@ static dispatch_once_t onceToken;
     command.curCommand = stopSessionCmd;
     int curMessageId = stopSessionMsgId;
     command.messageId = curMessageId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
         
-        id commandData = [self configCommandData:curMessageId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
-    
-//    self.curCommand = command;
-//    command.taskBlock();
     [self addOrder:command];
 }
 
@@ -256,10 +256,12 @@ static dispatch_once_t onceToken;
     command.curCommand = shutterCmd;
     int curMessageId = shutterMsgId;
     command.messageId = curMessageId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
 
-        id commandData = [self configCommandData:curMessageId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -271,10 +273,12 @@ static dispatch_once_t onceToken;
     command.curCommand = recordStartCmd;
     int curMessageId = recordStartMsgId;
     command.messageId = curMessageId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
         
-        id commandData = [self configCommandData:curMessageId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -286,10 +290,12 @@ static dispatch_once_t onceToken;
     command.curCommand = recordStopCmd;
     int curMessageId = recordStopMsgId;
     command.messageId = curMessageId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
         
-        id commandData = [self configCommandData:curMessageId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -301,10 +307,12 @@ static dispatch_once_t onceToken;
     command.curCommand = allSettingsCmd;
     int curMessageId = allSettingsMsgId;
     command.messageId = curMessageId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
         
-        id commandData = [self configCommandData:curMessageId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -316,10 +324,12 @@ static dispatch_once_t onceToken;
     command.curCommand = formatSDMediaCmd;
     int curMessageId = formatSDMediaMsgId;
     command.messageId = curMessageId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
         
-        id commandData = [self configCommandData:curMessageId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -331,83 +341,110 @@ static dispatch_once_t onceToken;
     command.curCommand = listAllFilesCmd;
     int curMessageId = listAllFilesMsgId;
     command.messageId = curMessageId;
+    __block AmbaCommand *blockCmd = command;
     command.taskBlock = ^{
         
-        id commandData = [self configCommandData:curMessageId];
-        [self writeDataToCamera:commandData andError:nil];
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
 }
 
-- (id)configCommandData:(unsigned int)commandCode {
+- (void)queryCmdValueList:(NSString *)cmdTitle andReturnBlock:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = getOptionsForValueCmd;
+    int curMessageId = getOptionsForValueMsgId;
+    command.messageId = curMessageId;
+//    command.param = cmdTitle;
+    _paramObject = cmdTitle;
+    __block AmbaCommand *blockCmd = command;
+    command.taskBlock = ^{
+        
+//        id commandData = [self configCommandData:curMessageId];
+//        [self writeDataToCamera:commandData andError:nil];
+        [self startCmd:blockCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)startCmd:(AmbaCommand *)cmd {
+//    id commandData = [self configCommandData:cmd.messageId];
+    id commandData = [self configDataForCommand:cmd];
+    [self writeDataToCamera:commandData andError:nil];
+}
+
+- (id)configDataForCommand:(AmbaCommand *)cmd {
     
     NSDictionary *commandDict;
     
-    if ( commandCode == 1 ||
-        commandCode == 5 ||
-        commandCode == 6 ||
-        commandCode == 15
+    if (cmd.messageId == 1 ||
+        cmd.messageId == 5 ||
+        cmd.messageId == 6 ||
+        cmd.messageId == 15
         ) { //commands with "type" only
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        _typeObject, typeKey,
                        nil];
         
-    } else if (commandCode == 1538 ||
-               commandCode == 1283 ||
-               commandCode == 1026 ||
-               commandCode == 1287 ||
-               commandCode == 1281 ||
-               commandCode == 16   ||
-               commandCode == 9    ||
-               commandCode == 4 )   { //commands with "param" only
+    } else if (cmd.messageId == 1538 ||
+               cmd.messageId == 1283 ||
+               cmd.messageId == 1026 ||
+               cmd.messageId == 1287 ||
+               cmd.messageId == 1281 ||
+               cmd.messageId == 16   ||
+               cmd.messageId == 9    ||
+               cmd.messageId == 4 )   { //commands with "param" only
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        _paramObject, paramKey,
                        nil];
-    } else if (commandCode == 1285 ) {//special cases
+    } else if (cmd.messageId == 1285 ) {//special cases
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        _paramObject, paramKey,
                        [NSNumber numberWithUnsignedInteger: _offsetObject], offsetKey,
                        [NSNumber numberWithUnsignedInteger:  _sizeToDlObject ], featchSizeKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        nil];
-    }else if (commandCode ==1286) //special case
+    }else if (cmd.messageId ==1286) //special case
     {
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        _paramObject, paramKey,
                        [NSNumber numberWithUnsignedInteger: _offsetObject], offsetKey,
                        [NSNumber numberWithUnsignedInteger:  _sizeToDlObject ], @"size",
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        _md5SumObject, @"md5sum",
                        nil];
-    } else if (commandCode == 1793) //special case SessionHolder
+    } else if (cmd.messageId == 1793) //special case SessionHolder
     {
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        nil];
         
-    }else if (commandCode == 2 ||
-              commandCode == 261)
+    }else if (cmd.messageId == 2 ||
+              cmd.messageId == 261)
     {
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        _paramObject, paramKey,
                        _typeObject, typeKey,
                        nil];
-    } else if ( commandCode == 1027)
+    } else if (cmd.messageId == 1027)
     {
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        _paramObject, paramKey,
                        [NSNumber numberWithUnsignedInteger:_fileAttributeValue], typeKey,
                        nil];
@@ -415,12 +452,94 @@ static dispatch_once_t onceToken;
     else {
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
-                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+                       [NSNumber numberWithUnsignedInteger:cmd.messageId], msgIdKey,
                        nil];
     }
     
     return commandDict;
 }
+
+//- (id)configCommandData:(unsigned int)commandCode {
+//
+//    NSDictionary *commandDict;
+//
+//    if ( commandCode == 1 ||
+//        commandCode == 5 ||
+//        commandCode == 6 ||
+//        commandCode == 15
+//        ) { //commands with "type" only
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       @(_sessionToken), tokenKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       _typeObject, typeKey,
+//                       nil];
+//
+//    } else if (commandCode == 1538 ||
+//               commandCode == 1283 ||
+//               commandCode == 1026 ||
+//               commandCode == 1287 ||
+//               commandCode == 1281 ||
+//               commandCode == 16   ||
+//               commandCode == 9    ||
+//               commandCode == 4 )   { //commands with "param" only
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       @(_sessionToken), tokenKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       _paramObject, paramKey,
+//                       nil];
+//    } else if (commandCode == 1285 ) {//special cases
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       @(_sessionToken), tokenKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       _paramObject, paramKey,
+//                       [NSNumber numberWithUnsignedInteger: _offsetObject], offsetKey,
+//                       [NSNumber numberWithUnsignedInteger:  _sizeToDlObject ], featchSizeKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       nil];
+//    }else if (commandCode ==1286) //special case
+//    {
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       @(_sessionToken), tokenKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       _paramObject, paramKey,
+//                       [NSNumber numberWithUnsignedInteger: _offsetObject], offsetKey,
+//                       [NSNumber numberWithUnsignedInteger:  _sizeToDlObject ], @"size",
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       _md5SumObject, @"md5sum",
+//                       nil];
+//    } else if (commandCode == 1793) //special case SessionHolder
+//    {
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       nil];
+//
+//    }else if (commandCode == 2 ||
+//              commandCode == 261)
+//    {
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       @(_sessionToken), tokenKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       _paramObject, paramKey,
+//                       _typeObject, typeKey,
+//                       nil];
+//    } else if ( commandCode == 1027)
+//    {
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       @(_sessionToken), tokenKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       _paramObject, paramKey,
+//                       [NSNumber numberWithUnsignedInteger:_fileAttributeValue], typeKey,
+//                       nil];
+//    }
+//    else {
+//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                       @(_sessionToken), tokenKey,
+//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
+//                       nil];
+//    }
+//
+//    return commandDict;
+//}
 
 - (NSInteger)writeDataToCamera:(id)obj andError:(NSError * _Nullable __autoreleasing *)error {
     
@@ -576,9 +695,36 @@ static dispatch_once_t onceToken;
     {
         [self responseToListAllFiles:responseMsg];
     }
+    else if (_curCommand.messageId == getOptionsForValueMsgId)
+    {
+        [self responseToGetOptionsSettings:responseMsg];
+    }
 }
 
 #pragma mark - Handle Message
+
+- (void) responseToGetOptionsSettings:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    if (rval != 0) {
+        error = [self errorForDescription:@"Get Options Settings fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
 
 - (void)responseToListAllFiles:(id)responseMsg {
     
@@ -637,7 +783,7 @@ static dispatch_once_t onceToken;
     if (rval != 0) {
         error = [self errorForDescription:@"Start Record fail"];
     }
-    
+     
     if (_curCommand.returnBlock) {
         _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
     }

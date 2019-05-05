@@ -87,5 +87,26 @@
         NSLog(@"List All Files结果: %@", resultStr);
     }];
 }
+- (IBAction)actionListOfVideoResolutionValues:(UIButton *)sender {
+    [_ambaController queryCmdValueList:@"video_resolution" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"video_resolution结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionListOfVideoCodingFormatValues:(UIButton *)sender {
+    [_ambaController queryCmdValueList:@"video_coding_format" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"video_coding_format结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionListOfVideoQualityValues:(UIButton *)sender {
+    [_ambaController queryCmdValueList:@"video_quality" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"video_quality结果: %@", resultStr);
+    }];
+}
 
 @end

@@ -71,6 +71,10 @@
     [_machine listAllFiles:block];
 }
 
+- (void)queryCmdValueList:(NSString *)cmdTitle andReturnBlock:(ReturnBlock)block {
+    [_machine queryCmdValueList:cmdTitle andReturnBlock:block];
+}
+
 #pragma mark - AmbaMachineDelegate
 
 - (void)ambaMachine:(AmbaMachine *)machine didUpdateConnectionStatus:(BOOL)isConnected forStream:(nonnull NSStream *)pStream{
