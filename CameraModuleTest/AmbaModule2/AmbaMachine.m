@@ -221,15 +221,12 @@ static dispatch_once_t onceToken;
     AmbaCommand *command = [AmbaCommand command];
     command.curCommand = startSessionCmd;
     command.messageId = startSessionMsgId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-//        id commandData = [self configCommandData:startSessionMsgId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
-    //    self.curCommand = command;
-    //    command.taskBlock();
     [self addOrder:command];
 }
 
@@ -239,12 +236,10 @@ static dispatch_once_t onceToken;
     command.curCommand = stopSessionCmd;
     int curMessageId = stopSessionMsgId;
     command.messageId = curMessageId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-        
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -256,12 +251,10 @@ static dispatch_once_t onceToken;
     command.curCommand = shutterCmd;
     int curMessageId = shutterMsgId;
     command.messageId = curMessageId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -273,12 +266,10 @@ static dispatch_once_t onceToken;
     command.curCommand = recordStartCmd;
     int curMessageId = recordStartMsgId;
     command.messageId = curMessageId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-        
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -290,12 +281,10 @@ static dispatch_once_t onceToken;
     command.curCommand = recordStopCmd;
     int curMessageId = recordStopMsgId;
     command.messageId = curMessageId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-        
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -307,12 +296,10 @@ static dispatch_once_t onceToken;
     command.curCommand = allSettingsCmd;
     int curMessageId = allSettingsMsgId;
     command.messageId = curMessageId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-        
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -324,12 +311,10 @@ static dispatch_once_t onceToken;
     command.curCommand = formatSDMediaCmd;
     int curMessageId = formatSDMediaMsgId;
     command.messageId = curMessageId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-        
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -341,12 +326,10 @@ static dispatch_once_t onceToken;
     command.curCommand = listAllFilesCmd;
     int curMessageId = listAllFilesMsgId;
     command.messageId = curMessageId;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-        
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
@@ -358,21 +341,18 @@ static dispatch_once_t onceToken;
     command.curCommand = getOptionsForValueCmd;
     int curMessageId = getOptionsForValueMsgId;
     command.messageId = curMessageId;
-//    command.param = cmdTitle;
+    command.param = cmdTitle;
     _paramObject = cmdTitle;
-    __block AmbaCommand *blockCmd = command;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
-        
-//        id commandData = [self configCommandData:curMessageId];
-//        [self writeDataToCamera:commandData andError:nil];
-        [self startCmd:blockCmd];
+        [weakSelf startCmd:weakCmd];
     };
     command.returnBlock = block;
     [self addOrder:command];
 }
 
 - (void)startCmd:(AmbaCommand *)cmd {
-//    id commandData = [self configCommandData:cmd.messageId];
     id commandData = [self configDataForCommand:cmd];
     [self writeDataToCamera:commandData andError:nil];
 }
@@ -458,88 +438,6 @@ static dispatch_once_t onceToken;
     
     return commandDict;
 }
-
-//- (id)configCommandData:(unsigned int)commandCode {
-//
-//    NSDictionary *commandDict;
-//
-//    if ( commandCode == 1 ||
-//        commandCode == 5 ||
-//        commandCode == 6 ||
-//        commandCode == 15
-//        ) { //commands with "type" only
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       @(_sessionToken), tokenKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       _typeObject, typeKey,
-//                       nil];
-//
-//    } else if (commandCode == 1538 ||
-//               commandCode == 1283 ||
-//               commandCode == 1026 ||
-//               commandCode == 1287 ||
-//               commandCode == 1281 ||
-//               commandCode == 16   ||
-//               commandCode == 9    ||
-//               commandCode == 4 )   { //commands with "param" only
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       @(_sessionToken), tokenKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       _paramObject, paramKey,
-//                       nil];
-//    } else if (commandCode == 1285 ) {//special cases
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       @(_sessionToken), tokenKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       _paramObject, paramKey,
-//                       [NSNumber numberWithUnsignedInteger: _offsetObject], offsetKey,
-//                       [NSNumber numberWithUnsignedInteger:  _sizeToDlObject ], featchSizeKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       nil];
-//    }else if (commandCode ==1286) //special case
-//    {
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       @(_sessionToken), tokenKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       _paramObject, paramKey,
-//                       [NSNumber numberWithUnsignedInteger: _offsetObject], offsetKey,
-//                       [NSNumber numberWithUnsignedInteger:  _sizeToDlObject ], @"size",
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       _md5SumObject, @"md5sum",
-//                       nil];
-//    } else if (commandCode == 1793) //special case SessionHolder
-//    {
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       nil];
-//
-//    }else if (commandCode == 2 ||
-//              commandCode == 261)
-//    {
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       @(_sessionToken), tokenKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       _paramObject, paramKey,
-//                       _typeObject, typeKey,
-//                       nil];
-//    } else if ( commandCode == 1027)
-//    {
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       @(_sessionToken), tokenKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       _paramObject, paramKey,
-//                       [NSNumber numberWithUnsignedInteger:_fileAttributeValue], typeKey,
-//                       nil];
-//    }
-//    else {
-//        commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                       @(_sessionToken), tokenKey,
-//                       [NSNumber numberWithUnsignedInteger:commandCode], msgIdKey,
-//                       nil];
-//    }
-//
-//    return commandDict;
-//}
 
 - (NSInteger)writeDataToCamera:(id)obj andError:(NSError * _Nullable __autoreleasing *)error {
     
