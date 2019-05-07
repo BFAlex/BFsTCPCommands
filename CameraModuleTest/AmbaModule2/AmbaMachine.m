@@ -308,8 +308,8 @@ static dispatch_once_t onceToken;
 - (void)formatSDCard:(ReturnBlock)block {
     
     AmbaCommand *command = [AmbaCommand command];
-    command.curCommand = formatSDMediaCmd;
-    int curMessageId = formatSDMediaMsgId;
+    command.curCommand = setCameraParameterCmd;
+    int curMessageId = setCameraParameterMsgId;
     command.messageId = curMessageId;
     __weak typeof(command) weakCmd = command;
     __weak typeof(self) weakSelf = self;
@@ -343,6 +343,69 @@ static dispatch_once_t onceToken;
     command.messageId = curMessageId;
     command.param = cmdTitle;
     _paramObject = cmdTitle;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)queryAppCurrentStatus:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = appStatusCmd;
+    int curMessageId = appStatusMsgId;
+    command.messageId = curMessageId;
+    _typeObject = @"app_status";
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)queryDeviceInfo:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = deviceInfoCmd;
+    int curMessageId = deviceInfoMsgId;
+    command.messageId = curMessageId;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)setCameraParameter:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = setCameraParameterCmd;
+    int curMessageId = setCameraParameterMsgId;
+    command.messageId = curMessageId;
+    _typeObject = param;
+    _paramObject = value;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)systemReset:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = setCameraParameterCmd;
+    int curMessageId = setCameraParameterMsgId;
+    command.messageId = curMessageId;
     __weak typeof(command) weakCmd = command;
     __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
@@ -540,14 +603,6 @@ static dispatch_once_t onceToken;
 
 - (void)messageReceived:(id)result {
     
-//    NSDictionary *resultDict;
-//    if ([result isKindOfClass:[NSString class]]) {
-//        resultDict = [self convertStringToDictionary:result];
-//    } else {
-//        resultDict = (NSDictionary *)result;
-//    }
-    
-//    [self.lockOfNetwork unlock];
     [self handleResultStringMsg:result];
 }
 
@@ -575,11 +630,11 @@ static dispatch_once_t onceToken;
     }
     else if (_curCommand.messageId == recordStartMsgId)
     {
-        [self responseToStartSession:responseDict];
+        [self responseToStartRecord:responseDict];
     }
     else if (_curCommand.messageId == recordStopMsgId)
     {
-        [self responseToStopSession:responseMsg];
+        [self responseToStopRecord:responseDict];
     }
     else if (_curCommand.messageId == allSettingsMsgId)
     {
@@ -597,9 +652,96 @@ static dispatch_once_t onceToken;
     {
         [self responseToGetOptionsSettings:responseMsg];
     }
+    else if (_curCommand.messageId == appStatusMsgId)
+    {
+        [self responseToAppStatus:responseMsg];
+    }
+    else if (_curCommand.messageId == deviceInfoMsgId)
+    {
+        [self responseToDeviceInfo:responseMsg];
+    }
+    else if (_curCommand.messageId == setCameraParameterMsgId)
+    {
+        [self responseToSetParams:responseMsg];
+    }
 }
 
 #pragma mark - Handle Message
+
+- (void)responseToSetParams:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    NSLog(@"set param result: %d", rval);
+    
+    if (rval != 0) {
+        error = [self errorForDescription:@"set param fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToDeviceInfo:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    NSLog(@"Device Info result: %d", rval);
+    
+    if (rval != 0) {
+        error = [self errorForDescription:@"Device Info fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToAppStatus:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    NSLog(@"App Status result: %d", rval);
+    
+    if (rval != 0) {
+        error = [self errorForDescription:@"App Status fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
 
 - (void) responseToGetOptionsSettings:(id)responseMsg {
     

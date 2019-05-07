@@ -75,6 +75,22 @@
     [_machine queryCmdValueList:cmdTitle andReturnBlock:block];
 }
 
+- (void)queryAppCurrentStatus:(ReturnBlock)block {
+    [_machine queryAppCurrentStatus:block];
+}
+
+- (void)queryDeviceInfo:(ReturnBlock)block {
+    [_machine queryDeviceInfo:block];
+}
+
+- (void)setCameraParameter:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block {
+    [_machine setCameraParameter:param value:value andReturnBlock:block];
+}
+
+- (void)systemReset:(ReturnBlock)block {
+    [_machine systemReset:block];
+}
+
 #pragma mark - AmbaMachineDelegate
 
 - (void)ambaMachine:(AmbaMachine *)machine didUpdateConnectionStatus:(BOOL)isConnected forStream:(nonnull NSStream *)pStream{

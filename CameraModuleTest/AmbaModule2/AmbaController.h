@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)formatSDCard:(ReturnBlock)block;
 - (void)listAllFiles:(ReturnBlock)block;
 - (void)queryCmdValueList:(NSString *)cmdTitle andReturnBlock:(ReturnBlock)block;
+- (void)queryAppCurrentStatus:(ReturnBlock)block;
+- (void)queryDeviceInfo:(ReturnBlock)block;
+- (void)setCameraParameter:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block;
+- (void)systemReset:(ReturnBlock)block;
 
 @end
 

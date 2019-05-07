@@ -108,5 +108,28 @@
         NSLog(@"video_quality结果: %@", resultStr);
     }];
 }
+- (IBAction)actionAppStatusBtn:(UIButton *)sender {
+    [_ambaController queryAppCurrentStatus:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"app status结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionDeviceInfoBtn:(UIButton *)sender {
+    [_ambaController queryDeviceInfo:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"device Info结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionVideoQualityBtn:(UIButton *)sender {
+}
+- (IBAction)actionSystemResetBtn:(UIButton *)sender {
+    [_ambaController systemReset:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"System Reset结果: %@", resultStr);
+    }];
+}
 
 @end
