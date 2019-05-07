@@ -195,6 +195,39 @@
                                     <action selector="actionSystemResetBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ng5-2t-4AW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc2-Cf-yJg">
+                                <rect key="frame" x="16" y="292" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="n68-gJ-8r0"/>
+                                    <constraint firstAttribute="height" constant="36" id="pMA-W0-dkb"/>
+                                </constraints>
+                                <state key="normal" title="文件路径"/>
+                                <connections>
+                                    <action selector="actionFilePathBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ksz-C2-phT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QR-Ih-KhV">
+                                <rect key="frame" x="219" y="204" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="oP3-ga-xYC"/>
+                                    <constraint firstAttribute="height" constant="36" id="yg9-5m-MqU"/>
+                                </constraints>
+                                <state key="normal" title="开启VF"/>
+                                <connections>
+                                    <action selector="actionStartVFBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gIX-Pf-pHu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKa-ed-BZc">
+                                <rect key="frame" x="220" y="248" width="94" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="WFY-nl-PiB"/>
+                                    <constraint firstAttribute="height" constant="36" id="fJF-XT-NUq"/>
+                                </constraints>
+                                <state key="normal" title="关闭VF"/>
+                                <connections>
+                                    <action selector="actionStopVFBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SUi-On-HeO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -204,19 +237,25 @@
                             <constraint firstItem="bVh-gi-5tM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="6qG-00-Jh9"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="leading" secondItem="bVh-gi-5tM" secondAttribute="trailing" constant="8" id="9me-fa-1cZ"/>
                             <constraint firstItem="btD-pq-kok" firstAttribute="leading" secondItem="bVh-gi-5tM" secondAttribute="leading" id="BGe-tx-xPn"/>
+                            <constraint firstItem="Dc2-Cf-yJg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="CBv-I7-WpA"/>
                             <constraint firstItem="m4T-G1-9xf" firstAttribute="top" secondItem="JHm-xg-XZG" secondAttribute="bottom" constant="8" id="Dbd-c3-bHo"/>
                             <constraint firstItem="Isc-B1-YL0" firstAttribute="top" secondItem="btD-pq-kok" secondAttribute="top" id="Dij-X2-0t6"/>
                             <constraint firstItem="6YZ-Ut-r5m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Dy8-lU-KKM"/>
+                            <constraint firstItem="4QR-Ih-KhV" firstAttribute="leading" secondItem="JHm-xg-XZG" secondAttribute="trailing" constant="7" id="EYX-mi-Bzm"/>
                             <constraint firstItem="iCc-9S-Mh9" firstAttribute="top" secondItem="j13-GW-0OM" secondAttribute="bottom" constant="8" id="Eyh-Lq-ffX"/>
+                            <constraint firstItem="kKa-ed-BZc" firstAttribute="top" secondItem="4QR-Ih-KhV" secondAttribute="bottom" constant="8" id="F7q-C8-RQm"/>
                             <constraint firstItem="cEM-L9-ioy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="FHh-aF-EQa"/>
                             <constraint firstItem="m4T-G1-9xf" firstAttribute="leading" secondItem="VjH-Rx-L1H" secondAttribute="trailing" constant="8" id="Fdt-Ul-YMN"/>
                             <constraint firstItem="2CU-ir-9I6" firstAttribute="width" secondItem="btD-pq-kok" secondAttribute="width" id="Ggy-HJ-3XZ"/>
                             <constraint firstItem="RaQ-A4-NHP" firstAttribute="width" secondItem="Isc-B1-YL0" secondAttribute="width" id="IV7-51-cjX"/>
+                            <constraint firstItem="4QR-Ih-KhV" firstAttribute="top" secondItem="FwP-yF-8je" secondAttribute="bottom" constant="8" id="MeU-H1-lEI"/>
                             <constraint firstItem="j13-GW-0OM" firstAttribute="top" secondItem="2CU-ir-9I6" secondAttribute="top" id="MfI-Xa-vrg"/>
                             <constraint firstItem="Isc-B1-YL0" firstAttribute="leading" secondItem="btD-pq-kok" secondAttribute="trailing" constant="8" id="O7p-PV-twY"/>
                             <constraint firstItem="cEM-L9-ioy" firstAttribute="top" secondItem="Zcz-dV-EPJ" secondAttribute="bottom" constant="8" id="OYP-ec-fNI"/>
                             <constraint firstItem="FwP-yF-8je" firstAttribute="top" secondItem="J4I-Ue-FYj" secondAttribute="bottom" constant="8" id="Oh8-Nv-bkq"/>
+                            <constraint firstItem="kKa-ed-BZc" firstAttribute="leading" secondItem="m4T-G1-9xf" secondAttribute="trailing" constant="8" id="Q7M-RY-1e9"/>
                             <constraint firstItem="J4I-Ue-FYj" firstAttribute="top" secondItem="RaQ-A4-NHP" secondAttribute="bottom" constant="8" id="QQW-9a-VBz"/>
+                            <constraint firstItem="Dc2-Cf-yJg" firstAttribute="top" secondItem="VjH-Rx-L1H" secondAttribute="bottom" constant="8" id="RJC-YX-g9p"/>
                             <constraint firstItem="VjH-Rx-L1H" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="RpQ-67-bRC"/>
                             <constraint firstItem="Dfl-sA-p6C" firstAttribute="width" secondItem="5Dj-dn-OKT" secondAttribute="width" id="SX4-4f-mCZ"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="width" secondItem="bVh-gi-5tM" secondAttribute="width" id="Tyk-Fj-OaQ"/>

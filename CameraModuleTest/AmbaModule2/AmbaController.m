@@ -91,6 +91,18 @@
     [_machine systemReset:block];
 }
 
+- (void)stopVF:(ReturnBlock)block {
+    [_machine stopVF:block];
+}
+
+- (void)resetVF:(ReturnBlock)block {
+    [_machine resetVF:block];
+}
+
+- (void)changeToFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block {
+    [_machine changeToFolder:folderName andReturnBlock:block];
+}
+
 #pragma mark - AmbaMachineDelegate
 
 - (void)ambaMachine:(AmbaMachine *)machine didUpdateConnectionStatus:(BOOL)isConnected forStream:(nonnull NSStream *)pStream{

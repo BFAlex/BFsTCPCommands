@@ -135,6 +135,8 @@ unsigned int recvResponse;
     NSInteger _fileAttributeValue;
     NSMutableString *tmpString;
     
+    dispatch_semaphore_t _taskSemaphore;
+    
     int     _curOperationCount; // 同步队列专用参数
 }
 @property (nonatomic, strong) NSString *tmpMsgStr;
@@ -415,6 +417,52 @@ static dispatch_once_t onceToken;
     [self addOrder:command];
 }
 
+- (void)changeToFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = changeToFolderCmd;
+    int curMessageId = changeToFolderMsgId;
+    command.messageId = curMessageId;
+    _paramObject = folderName;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)stopVF:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = stopVFCmd;
+    int curMessageId = stopVFMsgId;
+    command.messageId = curMessageId;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)resetVF:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = resetVFCmd;
+    int curMessageId = resetVFMsgId;
+    command.messageId = curMessageId;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
 - (void)startCmd:(AmbaCommand *)cmd {
     id commandData = [self configDataForCommand:cmd];
     [self writeDataToCamera:commandData andError:nil];
@@ -664,9 +712,50 @@ static dispatch_once_t onceToken;
     {
         [self responseToSetParams:responseMsg];
     }
+    else if (_curCommand.messageId == stopVFMsgId)
+    {
+        [self responseToVFStatus:responseMsg];
+    }
+    else if (_curCommand.messageId == resetVFMsgId)
+    {
+        [self responseToVFStatus:responseMsg];
+    }
+    else if (_curCommand.messageId == changeToFolderMsgId)
+    {
+        [self responseToListAllFiles:responseMsg];
+    }
+    
+//    [self.lockOfNetwork unlock];
+    dispatch_semaphore_signal(_taskSemaphore);
+    NSLog(@"task thread(result): %@", [NSThread currentThread]);
 }
 
 #pragma mark - Handle Message
+
+- (void)responseToVFStatus:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    NSLog(@"VF result: %d", rval);
+    
+    if (rval != 0) {
+        error = [self errorForDescription:@"VF fail"];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
 
 - (void)responseToSetParams:(id)responseMsg {
     
@@ -1036,7 +1125,7 @@ static dispatch_once_t onceToken;
  并发队列顺序执行order
  */
 - (void)addNetworkOrder:(AmbaCommand *)order {
-    NSLog(@"添加任务线程： %@", [NSThread currentThread]);
+//    NSLog(@"添加任务线程： %@", [NSThread currentThread]);
     [self.lockOfNetwork lock];
     [self.ordersOfConcurrent addObject:order];
 
@@ -1070,9 +1159,10 @@ static dispatch_once_t onceToken;
     /**
      增加具体的网络指令内容
      */
-    [NSThread sleepForTimeInterval:0.5f];
 
 //    [self.lockOfNetwork lock];
+    dispatch_semaphore_wait(_taskSemaphore, DISPATCH_TIME_FOREVER);
+    NSLog(@"task thread: %@", [NSThread currentThread]);
     self.curCommand = order;
     order.taskBlock();
 
@@ -1102,6 +1192,8 @@ static dispatch_once_t onceToken;
     self.concurrentQueue = dispatch_queue_create([queueName cStringUsingEncoding:NSUTF8StringEncoding], DISPATCH_QUEUE_CONCURRENT);
     self.maxConcurrentOperationCount = 1;
     _curOperationCount = 0;
+    
+    _taskSemaphore = dispatch_semaphore_create(1);
 }
 
 @end

@@ -131,5 +131,140 @@
         NSLog(@"System Reset结果: %@", resultStr);
     }];
 }
+- (IBAction)actionStartVFBtn:(UIButton *)sender {
+    [_ambaController resetVF:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"StartVF结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionStopVFBtn:(UIButton *)sender {
+    [_ambaController stopVF:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSString *resultStr = error ? error.description : @"成功";
+        NSLog(@"StopVF结果: %@", resultStr);
+    }];
+}
+- (IBAction)actionFilePathBtn:(UIButton *)sender {
+    
+//    [self searchTestFolders];
+    [self startSearchFiles];
+}
+
+
+#pragma mark - Func
+
+- (void)searchTestFolders {
+    
+    [_ambaController changeToFolder:@"/tmp/SD0/DCIM" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        [self->_ambaController stopVF:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+            NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        }];
+    }];
+}
+// *************
+- (void)startSearchFiles {
+    
+    NSString *rootFolder = @"/tmp/SD0";
+    NSArray *folders = @[rootFolder];
+    
+    NSLog(@"start search files");
+    [self searchFilesFromFolders:folders andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"all media files(%lu): %@", (unsigned long)[(NSArray *)result count], result);
+    }];
+}
+
+- (void)searchFilesFromFolders:(NSArray *)pFolders andReturnBlock:(ReturnBlock)block {
+    
+    if (pFolders.count < 1 && block) {
+        block(nil, 0, nil, ResultTypeNone);
+        return;
+    }
+    
+    NSString *folderName = pFolders[0];
+    NSArray *otherFolders;
+    if (pFolders.count > 1) {
+        otherFolders = [pFolders subarrayWithRange:NSMakeRange(1, pFolders.count - 1)];
+    }
+    
+    [self searchFilesInFolder:folderName andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        //
+        if (!otherFolders && block) {
+            block(error, cmd, result, type);
+        } else {
+            NSArray *folderFiles = (NSArray *)result;
+            [self searchFilesFromFolders:[otherFolders copy] andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+                NSArray *otherFolderFiles = (NSArray *)result;
+                NSMutableArray *allFiles = [NSMutableArray array];
+                for (id media in folderFiles) {
+                    [allFiles addObject:media];
+                }
+                for (id file in otherFolderFiles) {
+                    [allFiles addObject:file];
+                }
+                //
+                if (block) {
+                    block(error, cmd, allFiles, type);
+                }
+            }];
+        }
+        
+    }];
+}
+
+- (void)searchFilesInFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block {
+    
+    __block NSMutableArray *folderFiles = [NSMutableArray array];
+    [_ambaController changeToFolder:folderName andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        //
+        [self->_ambaController listAllFiles:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+            if (error) {
+                NSLog(@"切换目录失败");
+                if (block) {
+                    block(error, cmd, result, type);
+                }
+                return ;
+            }
+            
+            NSArray *listing = [(NSDictionary *)result objectForKey:@"listing"];
+            NSMutableArray *folders = [NSMutableArray array];
+            for (NSDictionary *itemDict in listing) {
+                NSArray *allKeys = [itemDict allKeys];
+                for (NSString *key in allKeys) {
+                    if ([key containsString:@"."] && [self isMediaFile:key]) {
+                        NSString *filePath = [folderName stringByAppendingPathComponent:key];
+                        [folderFiles addObject:filePath];
+                    } else {
+                        NSString *folder = [folderName stringByAppendingPathComponent:key];
+                        [folders addObject:folder];
+                    }
+                }
+            }
+            
+            if (folders.count > 0) {
+                [self searchFilesFromFolders:[folders copy] andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+                    //
+                    [folderFiles addObjectsFromArray:[(NSArray *)result copy]];
+                    if (block) {
+                        block(error, cmd, folderFiles, type);
+                    }
+                }];
+            } else {
+                if (block) {
+                    block(error, cmd, folderFiles, type);
+                }
+            }
+        }];
+    }];
+}
+
+- (BOOL)isMediaFile:(NSString *)fileName {
+    
+    if ([fileName hasSuffix:@".MP4"] || [fileName hasSuffix:@".JPG"]) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 @end

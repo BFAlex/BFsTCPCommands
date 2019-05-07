@@ -823,7 +823,7 @@
 					"$(PROJECT_DIR)/FFMPEG_External/FFmpeg-iOS/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TestAppIDs.-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TestAppIDs.amba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -850,7 +850,7 @@
 					"$(PROJECT_DIR)/FFMPEG_External/FFmpeg-iOS/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TestAppIDs.-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.TestAppIDs.amba;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

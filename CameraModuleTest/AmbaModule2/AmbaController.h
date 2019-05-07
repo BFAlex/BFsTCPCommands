@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)queryDeviceInfo:(ReturnBlock)block;
 - (void)setCameraParameter:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block;
 - (void)systemReset:(ReturnBlock)block;
+- (void)changeToFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block;
+- (void)stopVF:(ReturnBlock)block;
+- (void)resetVF:(ReturnBlock)block;
 
 @end
 
