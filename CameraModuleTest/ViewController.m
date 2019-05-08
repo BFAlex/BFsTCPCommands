@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AmbaController.h"
+#import "BFFileAssistant.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) AmbaController *ambaController;
@@ -71,6 +72,10 @@
         NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
         NSString *resultStr = error ? error.description : @"成功";
         NSLog(@"setting结果: %@", resultStr);
+        
+        [self->_ambaController setClientInfo:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+            NSLog(@"set client: %@", result);
+        }];
     }];
 }
 - (IBAction)actionFormatSDBtn:(UIButton *)sender {
@@ -149,6 +154,36 @@
     
 //    [self searchTestFolders];
     [self startSearchFiles];
+}
+- (IBAction)actionThumbnailBtn:(UIButton *)sender {
+
+    // 视频
+//    [_ambaController getThumbnail:@"IDR" value:@"/tmp/SD0/DCIM/190505000/00000_00000020190505203335_0001A.MP4" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+//        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+//    }];
+    // 图片
+    [_ambaController getThumbnail:@"thumb" value:@"/tmp/SD0/DCIM/190506000/00000_00000020190506112343_0009.JPG" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+    }];
+}
+- (IBAction)actionFileBtn:(UIButton *)sender {
+    
+//    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508155523_0005.JPG";
+    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508174903_0011A.MP4";
+    
+    [_ambaController getMediaFile:filePath ipAddress:@"192.168.42.1" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+    }];
+}
+- (IBAction)actionLocalFilesBtn:(UIButton *)sender {
+    NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    BFFileAssistant *fileAssistant = [BFFileAssistant defaultAssistant];
+    NSString *documentPath = [fileAssistant getDirectoryPathFromDirectories:@[@"Files"]];
+    NSArray *files = [fileAssistant getFilesFromDirectoryPath:documentPath];
+    NSLog(@"%@\nfile count: %lu", documentPath, (unsigned long)files.count);
+    for (NSString *file in files) {
+        NSLog(@"file: %@", file);
+    }
 }
 
 
@@ -231,9 +266,11 @@
             for (NSDictionary *itemDict in listing) {
                 NSArray *allKeys = [itemDict allKeys];
                 for (NSString *key in allKeys) {
-                    if ([key containsString:@"."] && [self isMediaFile:key]) {
-                        NSString *filePath = [folderName stringByAppendingPathComponent:key];
-                        [folderFiles addObject:filePath];
+                    if ([key containsString:@"."]) {
+                        if ([self isMediaFile:key]) {
+                            NSString *filePath = [folderName stringByAppendingPathComponent:key];
+                            [folderFiles addObject:filePath];
+                        }
                     } else {
                         NSString *folder = [folderName stringByAppendingPathComponent:key];
                         [folders addObject:folder];

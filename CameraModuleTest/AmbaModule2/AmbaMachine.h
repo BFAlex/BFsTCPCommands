@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)initNetworkCommunication:(NSString *)ipAddress tcpPort:(NSInteger)tcpPortNo;
 - (void)disconnectFromMachine;
 - (void)startSession:(ReturnBlock)block;
+- (void)setClientInfo:(ReturnBlock)block;
 - (void)stopSession:(ReturnBlock)block;
 - (void)shutter:(ReturnBlock)block;
 - (void)startRecord:(ReturnBlock)block;
@@ -45,6 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeToFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block;
 - (void)stopVF:(ReturnBlock)block;
 - (void)resetVF:(ReturnBlock)block;
+- (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block;
+// 文件
+- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block;
+
 
 @end
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4245DD32282B6AD00578721 /* AmbaFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C4245DD22282B6AD00578721 /* AmbaFileManager.m */; };
+		C4245DD72282CE4600578721 /* BFFileAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = C4245DD52282CE4600578721 /* BFFileAssistant.m */; };
 		C4FC1B27227697E10094419C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B26227697E00094419C /* AppDelegate.m */; };
 		C4FC1B2A227697E10094419C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B29227697E10094419C /* ViewController.m */; };
 		C4FC1B2D227697E10094419C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4FC1B2B227697E10094419C /* Main.storyboard */; };
@@ -19,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4245DD12282B6AD00578721 /* AmbaFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbaFileManager.h; sourceTree = "<group>"; };
+		C4245DD22282B6AD00578721 /* AmbaFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AmbaFileManager.m; sourceTree = "<group>"; };
+		C4245DD52282CE4600578721 /* BFFileAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFFileAssistant.m; sourceTree = "<group>"; };
+		C4245DD62282CE4600578721 /* BFFileAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFFileAssistant.h; sourceTree = "<group>"; };
 		C4FC1B22227697E00094419C /* CameraModuleTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraModuleTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FC1B25227697E00094419C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C4FC1B26227697E00094419C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -49,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C4245DD42282CE3300578721 /* FileModule */ = {
+			isa = PBXGroup;
+			children = (
+				C4245DD62282CE4600578721 /* BFFileAssistant.h */,
+				C4245DD52282CE4600578721 /* BFFileAssistant.m */,
+			);
+			path = FileModule;
+			sourceTree = "<group>";
+		};
 		C4FC1B19227697E00094419C = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				C4FC1B4622769A2D0094419C /* CameraControllerHeader.h */,
+				C4245DD42282CE3300578721 /* FileModule */,
 				C4FC1B592276E3AB0094419C /* AmbaModule2 */,
 				C4FC1B25227697E00094419C /* AppDelegate.h */,
 				C4FC1B26227697E00094419C /* AppDelegate.m */,
@@ -92,6 +108,8 @@
 				C4FC1B5D2276E3AB0094419C /* AmbaMachine.m */,
 				C4FC1B682276E77B0094419C /* AmbaCommand.h */,
 				C4FC1B692276E77B0094419C /* AmbaCommand.m */,
+				C4245DD12282B6AD00578721 /* AmbaFileManager.h */,
+				C4245DD22282B6AD00578721 /* AmbaFileManager.m */,
 			);
 			path = AmbaModule2;
 			sourceTree = "<group>";
@@ -166,11 +184,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4245DD32282B6AD00578721 /* AmbaFileManager.m in Sources */,
 				C4FC1B6A2276E77B0094419C /* AmbaCommand.m in Sources */,
 				C4FC1B5E2276E3AB0094419C /* AmbaController.m in Sources */,
 				C4FC1B2A227697E10094419C /* ViewController.m in Sources */,
 				C4FC1B35227697F10094419C /* main.m in Sources */,
 				C4FC1B5F2276E3AB0094419C /* AmbaMachine.m in Sources */,
+				C4245DD72282CE4600578721 /* BFFileAssistant.m in Sources */,
 				C4FC1B27227697E10094419C /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

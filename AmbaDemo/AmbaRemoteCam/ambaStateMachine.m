@@ -1886,6 +1886,7 @@ static ambaStateMachine *instance = nil;
 
 - (void) cameraFileDownload:(NSString *)inputTextVal :(NSString *)offsetInput :(NSString *)sizeToDownload
 {
+    NSLog(@"cameraFileDownload ->[%@,%@,%@,%@]", self.wifiIPParameters, inputTextVal, offsetInput, sizeToDownload);
     lastCommand = currentCommand;
     currentCommand = (NSMutableString *) getFileCmd;
     paramObject = (NSMutableString *) inputTextVal;

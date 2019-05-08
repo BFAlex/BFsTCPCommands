@@ -7,6 +7,7 @@
 //
 
 #import "AmbaMachine.h"
+#import "AmbaFileManager.h"
 
 NSString  *tokenKey     = @"token";
 NSString  *msgIdKey     = @"msg_id";
@@ -56,6 +57,7 @@ NSString *allSettingsCmd    = @"allSettings";
 NSString *getSettingValueCmd = @"getSettingValue";
 NSString *getOptionsForValueCmd = @"getOptionsForValue";
 NSString *setCameraParameterCmd = @"setCameraParamValue";
+NSString *getThumbnailCmd = @"getThumbnailCmd";
 NSString *sendCustomJSONCmd = @"sendCustomJSONCmd";
 NSString *setClientInfoCmd  = @"setClientInfoCmd";
 NSString *getWifiSettingsCmd = @"getWifiSettingsCmd";
@@ -98,6 +100,7 @@ const unsigned int splitRecordingMsgId  = 516;
 
 const unsigned int shutterMsgId         = 769;
 const unsigned int stopContPhotoSessionMsgId = 770;
+const unsigned int getThumbnailId       = 1025;
 const unsigned int mediaInfoMsgId       = 1026;
 const unsigned int fileAttributeMsgId   = 1027;
 
@@ -139,6 +142,7 @@ unsigned int recvResponse;
     
     int     _curOperationCount; // 同步队列专用参数
 }
+@property (nonatomic, strong) NSString *ipAddress;
 @property (nonatomic, strong) NSString *tmpMsgStr;
 @property (nonatomic, strong) NSInputStream *inputStream;
 @property (nonatomic, strong) NSOutputStream *outputStream;
@@ -206,6 +210,7 @@ static dispatch_once_t onceToken;
     
     self.isConnected = NO;
     _sessionToken = 0;
+    self.ipAddress = ipAddress;
 }
 
 - (void)disconnectFromMachine {
@@ -223,6 +228,23 @@ static dispatch_once_t onceToken;
     AmbaCommand *command = [AmbaCommand command];
     command.curCommand = startSessionCmd;
     command.messageId = startSessionMsgId;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)setClientInfo:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = setClientInfoCmd;
+    int curMessageId = setClientInfoMsgId;
+    command.messageId = curMessageId;
+    _paramObject = self.ipAddress;
+    _typeObject = @"TCP";
     __weak typeof(command) weakCmd = command;
     __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
@@ -311,8 +333,9 @@ static dispatch_once_t onceToken;
     
     AmbaCommand *command = [AmbaCommand command];
     command.curCommand = setCameraParameterCmd;
-    int curMessageId = setCameraParameterMsgId;
+    int curMessageId = formatSDMediaMsgId; // setCameraParameterMsgId
     command.messageId = curMessageId;
+    _paramObject = @"C:";
     __weak typeof(command) weakCmd = command;
     __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
@@ -463,6 +486,53 @@ static dispatch_once_t onceToken;
     [self addOrder:command];
 }
 
+- (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = getThumbnailCmd;
+    int curMessageId = getThumbnailId;
+    command.messageId = curMessageId;
+    _typeObject = param;
+    _paramObject = value;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block {
+    
+    _paramObject = fileName;
+    _offsetObject = 0;
+    _sizeToDlObject = 0;
+    //
+    [[AmbaFileManager sharedInstance] initDataCommunication:ipaddress tcpPort:8787 fileName:_paramObject];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self ambaGetFile:block];
+    });
+    
+}
+
+- (void)ambaGetFile:(ReturnBlock)block {
+    
+    AmbaCommand *command = [AmbaCommand command];
+    command.curCommand = getFileCmd;
+    int curMessageId = getFileMsgId;
+    command.messageId = curMessageId;
+    __weak typeof(command) weakCmd = command;
+    __weak typeof(self) weakSelf = self;
+    command.taskBlock = ^{
+        [weakSelf startCmd:weakCmd];
+    };
+    command.returnBlock = block;
+    [self addOrder:command];
+}
+
+// ************************
+
 - (void)startCmd:(AmbaCommand *)cmd {
     id commandData = [self configDataForCommand:cmd];
     [self writeDataToCamera:commandData andError:nil];
@@ -523,7 +593,8 @@ static dispatch_once_t onceToken;
                        nil];
         
     }else if (cmd.messageId == 2 ||
-              cmd.messageId == 261)
+              cmd.messageId == 261  ||
+              cmd.messageId == 1025)
     {
         commandDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @(_sessionToken), tokenKey,
@@ -565,7 +636,7 @@ static dispatch_once_t onceToken;
 #pragma mark - NSStreamDelegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    NSLog(@"[%@ %@]: %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (unsigned long)eventCode);
     
     switch (eventCode) {
         case NSStreamEventOpenCompleted:
@@ -656,6 +727,7 @@ static dispatch_once_t onceToken;
 
 - (void)handleResultStringMsg:(id)responseMsg {
     
+    NSLog(@"[%@]:%@", NSStringFromSelector(_cmd), responseMsg);
     NSDictionary *responseDict;
     if ([responseMsg isKindOfClass:[NSString class]]) {
         responseDict = [self convertStringToDictionary:responseMsg];
@@ -724,13 +796,79 @@ static dispatch_once_t onceToken;
     {
         [self responseToListAllFiles:responseMsg];
     }
+    else if (_curCommand.messageId == getFileMsgId)
+    {
+        [self responseToFileDownload:responseMsg];
+    }
+    else if (_curCommand.messageId == setClientInfoMsgId)
+    {
+        [self responseToCmd:responseMsg];
+    }
     
 //    [self.lockOfNetwork unlock];
     dispatch_semaphore_signal(_taskSemaphore);
-    NSLog(@"task thread(result): %@", [NSThread currentThread]);
+//    NSLog(@"task thread(result): %@", [NSThread currentThread]);
 }
 
 #pragma mark - Handle Message
+
+// ****
+- (void)responseToCmd:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    NSString *msgId = [responseDict objectForKey:msgIdKey];
+    NSLog(@"cmd(%@) result: %d", msgId, rval);
+    if (rval != 0) {
+        error = [self errorForDescription:[NSString stringWithFormat:@"Cmd(%@) fail", msgId]];
+    }
+    
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+    }
+}
+
+- (void)responseToFileDownload:(id)responseMsg {
+    
+    NSError *error;
+    NSDictionary *responseDict;
+    if ([responseMsg isKindOfClass:[NSString class]]) {
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
+    } else {
+        responseDict = responseMsg;
+    }
+    
+    int rval = [[responseDict objectForKey:rvalKey] intValue];
+    NSString *msgId = [responseDict objectForKey:msgIdKey];
+    NSLog(@"cmd(%@) result: %d", msgId, rval);
+    
+    if (rval == 0) {
+        NSLog(@"file is downloading on port 8787");
+    } else if (rval != 0) {
+        error = [self errorForDescription:[NSString stringWithFormat:@"file finish down"]];
+        [[AmbaFileManager sharedInstance] closeTCPConnection];
+        [[AmbaFileManager sharedInstance] destoryInstance];
+        
+        if (_curCommand.returnBlock) {
+            _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
+        }
+    }
+}
+
+// ***
 
 - (void)responseToVFStatus:(id)responseMsg {
     
@@ -1161,8 +1299,12 @@ static dispatch_once_t onceToken;
      */
 
 //    [self.lockOfNetwork lock];
-    dispatch_semaphore_wait(_taskSemaphore, DISPATCH_TIME_FOREVER);
-    NSLog(@"task thread: %@", [NSThread currentThread]);
+    long result = dispatch_semaphore_wait(_taskSemaphore, 5.f);
+    if (result != 0) {
+        NSLog(@"cmd(%d) overtime", self.curCommand.messageId);
+        [NSThread sleepForTimeInterval:1.f];
+    }
+//    NSLog(@"task thread: %@", [NSThread currentThread]);
     self.curCommand = order;
     order.taskBlock();
 

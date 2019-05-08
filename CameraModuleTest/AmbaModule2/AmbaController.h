@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)connectToCamera:(ReturnBlock)block;
 - (void)disconnectFromCamera:(ReturnBlock)block;
 - (void)startSession:(ReturnBlock)block;
+- (void)setClientInfo:(ReturnBlock)block;
 - (void)takePhoto:(ReturnBlock)block;
 - (void)startRecord:(ReturnBlock)block;
 - (void)stopRecord:(ReturnBlock)block;
@@ -30,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeToFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block;
 - (void)stopVF:(ReturnBlock)block;
 - (void)resetVF:(ReturnBlock)block;
+- (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block;
+// 文件
+- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block;
 
 @end
 

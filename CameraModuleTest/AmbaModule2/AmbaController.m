@@ -43,6 +43,10 @@
     [_machine startSession:block];
 }
 
+- (void)setClientInfo:(ReturnBlock)block {
+    [_machine setClientInfo:block];
+}
+
 - (void)takePhoto:(ReturnBlock)block {
 //    [_machine shutter:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
 //        NSString *resultStr = error ? error.description : @"成功";
@@ -101,6 +105,14 @@
 
 - (void)changeToFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block {
     [_machine changeToFolder:folderName andReturnBlock:block];
+}
+
+- (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block {
+    [_machine getThumbnail:param value:value andReturnBlock:block];
+}
+
+- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block {
+    [_machine getMediaFile:fileName ipAddress:ipaddress andReturnBlock:block];
 }
 
 #pragma mark - AmbaMachineDelegate
