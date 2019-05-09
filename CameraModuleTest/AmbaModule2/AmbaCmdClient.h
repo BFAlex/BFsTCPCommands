@@ -11,17 +11,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class AmbaMachine;
-@protocol AmbaMachineDelegate <NSObject>
+@class AmbaCmdClient;
+@protocol AmbaCmdClientDelegate <NSObject>
 
 @optional
-- (void)ambaMachine:(AmbaMachine *)machine didUpdateConnectionStatus:(BOOL)isConnected  forStream:(NSStream *)pStream;
+- (void)ambaMachine:(AmbaCmdClient *)machine didUpdateConnectionStatus:(BOOL)isConnected  forStream:(NSStream *)pStream;
 
 @end
 
-@interface AmbaMachine : NSObject
+@interface AmbaCmdClient : NSObject
 
-@property (nonatomic, weak) id<AmbaMachineDelegate> delegate;
+@property (nonatomic, weak) id<AmbaCmdClientDelegate> delegate;
 @property (nonatomic, assign) BOOL isConnected;
 
 + (instancetype)sharedMachine;

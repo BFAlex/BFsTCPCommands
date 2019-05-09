@@ -6,9 +6,9 @@
 //  Copyright © 2019年 BFs. All rights reserved.
 //
 
-#import "AmbaFileManager.h"
+#import "AmbaDataClient.h"
 
-@interface AmbaFileManager () <NSStreamDelegate>
+@interface AmbaDataClient () <NSStreamDelegate>
 {
     NSInputStream *dataInStream;
     NSOutputStream *dataOutStream;
@@ -25,9 +25,9 @@
 
 @end
 
-@implementation AmbaFileManager
+@implementation AmbaDataClient
 
-static AmbaFileManager *manager;
+static AmbaDataClient *dataClient;
 static dispatch_once_t onceToken;
 
 #pragma mark - API
@@ -35,19 +35,22 @@ static dispatch_once_t onceToken;
 + (instancetype)sharedInstance {
     
     dispatch_once(&onceToken, ^{
-        manager = [[AmbaFileManager alloc] init];
+        dataClient = [[AmbaDataClient alloc] init];
     });
     
-    return manager;
+    return dataClient;
 }
 - (void)destoryInstance {
+    NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    
     if (onceToken > 0) {
-        manager = nil;
+        dataClient = nil;
         onceToken = 0;
     }
 }
 
 - (void)initDataCommunication:(NSString *)ipAddress tcpPort:(NSInteger)tcpPortNo fileName:(NSString *)fileName {
+    NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
@@ -66,6 +69,12 @@ static dispatch_once_t onceToken;
     
     NSLog(@"File Download @ %@ : %lu OPEN", ipAddress, (long)tcpPortNo);
     [self.wifiParameters appendString:ipAddress];
+    //
+    [self createrRelativeLocalFile:fileName];
+}
+
+- (void)createrRelativeLocalFile:(NSString *)fileName {
+    
     //Open File To save Only if its Image
     if ([[fileName pathExtension] isEqualToString:@"jpg"] || [[fileName pathExtension] isEqualToString:@"JPG"])
     {
@@ -87,7 +96,7 @@ static dispatch_once_t onceToken;
 }
 
 - (void)closeFileDownloadConnection {
-    NSLog(@" close download Port!!");
+    NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
     [dataInStream close];
     [dataOutStream close];
@@ -95,6 +104,7 @@ static dispatch_once_t onceToken;
 }
 
 - (void)closeTCPConnection {
+    NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
     [dataOutStream close];
     [dataInStream close];
@@ -105,16 +115,16 @@ static dispatch_once_t onceToken;
 #pragma mark - NSStreamDelegate
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    NSLog(@"[%@ %@] %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (unsigned long)eventCode);
+//    NSLog(@"[%@ %@] %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (unsigned long)eventCode);
     
     switch (eventCode)
     {
         case NSStreamEventOpenCompleted:
-            NSLog(@"Data Connection with Camera: Open");
-            //[self ambaLogString:@"WiFi Connection With Camera Open" toFile:AMBALOGFILE];
+            NSLog(@"Data Client Connection with Camera: Open");
             downloadFlag = 1;
             break;
         case NSStreamEventHasBytesAvailable:
+            NSLog(@"[%@]8787 stream receive data", NSStringFromClass([self class]));
             if (aStream == dataInStream) {
                 uint8_t buffer[1024];
                 NSInteger len;

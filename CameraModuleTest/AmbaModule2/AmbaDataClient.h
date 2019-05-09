@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AmbaFileManager : NSObject
+@interface AmbaDataClient : NSObject
 
 + (instancetype)sharedInstance;
 - (void)destoryInstance;

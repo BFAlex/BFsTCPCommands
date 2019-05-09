@@ -169,7 +169,7 @@
 - (IBAction)actionFileBtn:(UIButton *)sender {
     
 //    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508155523_0005.JPG";
-    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508174903_0011A.MP4";
+    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508182255_0012A.MP4";
     
     [_ambaController getMediaFile:filePath ipAddress:@"192.168.42.1" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
         NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);

@@ -7,11 +7,11 @@
 //
 
 #import "AmbaController.h"
-#import "AmbaMachine.h"
+#import "AmbaCmdClient.h"
 #import "CameraControllerHeader.h"
 
-@interface AmbaController () <AmbaMachineDelegate>
-@property (nonatomic, strong) AmbaMachine *machine;
+@interface AmbaController () <AmbaCmdClientDelegate>
+@property (nonatomic, strong) AmbaCmdClient *ambaCmdClient;
 @property (nonatomic, assign) ReturnBlock connectedStatusBlock;
 
 @end
@@ -22,107 +22,99 @@
 
 - (void)connectToCamera:(ReturnBlock)block {
     
-    if (!_machine) {
-        _machine = [AmbaMachine sharedMachine];
-        _machine.delegate = self;
+    if (!_ambaCmdClient) {
+        _ambaCmdClient = [AmbaCmdClient sharedMachine];
+        _ambaCmdClient.delegate = self;
     }
     _connectedStatusBlock = block;
-    [_machine initNetworkCommunication:@"192.168.42.1" tcpPort:7878];
+    [_ambaCmdClient initNetworkCommunication:@"192.168.42.1" tcpPort:7878];
 }
 
 - (void)disconnectFromCamera:(ReturnBlock)block {
-    [_machine stopSession:block];
-    [_machine destoryMachine];
+    [_ambaCmdClient stopSession:block];
+    [_ambaCmdClient destoryMachine];
 }
 
 - (void)startSession:(ReturnBlock)block {
-//    [_machine startSession:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
-//        NSString *resultStr = error ? error.description : @"成功";
-//        NSLog(@"开启会话结果: %@", resultStr);
-//    }];
-    [_machine startSession:block];
+    [_ambaCmdClient startSession:block];
 }
 
 - (void)setClientInfo:(ReturnBlock)block {
-    [_machine setClientInfo:block];
+    [_ambaCmdClient setClientInfo:block];
 }
 
 - (void)takePhoto:(ReturnBlock)block {
-//    [_machine shutter:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
-//        NSString *resultStr = error ? error.description : @"成功";
-//        NSLog(@"拍照结果: %@", resultStr);
-//    }];
-    [_machine shutter:block];
+    [_ambaCmdClient shutter:block];
 }
 
 - (void)startRecord:(ReturnBlock)block {
-    [_machine startRecord:block];
+    [_ambaCmdClient startRecord:block];
 }
 
 - (void)stopRecord:(ReturnBlock)block {
-    [_machine stopRecord:block];
+    [_ambaCmdClient stopRecord:block];
 }
 
 - (void)currentMachineStatus:(ReturnBlock)block {
-    [_machine currentSettingStatus:block];
+    [_ambaCmdClient currentSettingStatus:block];
 }
 
 - (void)formatSDCard:(ReturnBlock)block {
-    [_machine formatSDCard:block];
+    [_ambaCmdClient formatSDCard:block];
 }
 
 - (void)listAllFiles:(ReturnBlock)block {
-    [_machine listAllFiles:block];
+    [_ambaCmdClient listAllFiles:block];
 }
 
 - (void)queryCmdValueList:(NSString *)cmdTitle andReturnBlock:(ReturnBlock)block {
-    [_machine queryCmdValueList:cmdTitle andReturnBlock:block];
+    [_ambaCmdClient queryCmdValueList:cmdTitle andReturnBlock:block];
 }
 
 - (void)queryAppCurrentStatus:(ReturnBlock)block {
-    [_machine queryAppCurrentStatus:block];
+    [_ambaCmdClient queryAppCurrentStatus:block];
 }
 
 - (void)queryDeviceInfo:(ReturnBlock)block {
-    [_machine queryDeviceInfo:block];
+    [_ambaCmdClient queryDeviceInfo:block];
 }
 
 - (void)setCameraParameter:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block {
-    [_machine setCameraParameter:param value:value andReturnBlock:block];
+    [_ambaCmdClient setCameraParameter:param value:value andReturnBlock:block];
 }
 
 - (void)systemReset:(ReturnBlock)block {
-    [_machine systemReset:block];
+    [_ambaCmdClient systemReset:block];
 }
 
 - (void)stopVF:(ReturnBlock)block {
-    [_machine stopVF:block];
+    [_ambaCmdClient stopVF:block];
 }
 
 - (void)resetVF:(ReturnBlock)block {
-    [_machine resetVF:block];
+    [_ambaCmdClient resetVF:block];
 }
 
 - (void)changeToFolder:(NSString *)folderName andReturnBlock:(ReturnBlock)block {
-    [_machine changeToFolder:folderName andReturnBlock:block];
+    [_ambaCmdClient changeToFolder:folderName andReturnBlock:block];
 }
 
 - (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block {
-    [_machine getThumbnail:param value:value andReturnBlock:block];
+    [_ambaCmdClient getThumbnail:param value:value andReturnBlock:block];
 }
 
 - (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block {
-    [_machine getMediaFile:fileName ipAddress:ipaddress andReturnBlock:block];
+    [_ambaCmdClient getMediaFile:fileName ipAddress:ipaddress andReturnBlock:block];
 }
 
-#pragma mark - AmbaMachineDelegate
+#pragma mark - AmbaCmdClientDelegate
 
-- (void)ambaMachine:(AmbaMachine *)machine didUpdateConnectionStatus:(BOOL)isConnected forStream:(nonnull NSStream *)pStream{
+- (void)ambaMachine:(AmbaCmdClient *)machine didUpdateConnectionStatus:(BOOL)isConnected forStream:(nonnull NSStream *)pStream{
     NSLog(@"[%@ %@]%@ is connected: %d",
           NSStringFromClass([self class]),
           NSStringFromSelector(_cmd),
           [pStream class],
-          _machine.isConnected);
+          _ambaCmdClient.isConnected);
     if (_connectedStatusBlock) {
         NSDictionary *resultDict = @{@"ConnectStatus":@(isConnected)};
         _connectedStatusBlock(nil, 0, resultDict, ResultTypeNone);

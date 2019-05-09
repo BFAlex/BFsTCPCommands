@@ -6,128 +6,13 @@
 //  Copyright © 2019年 BFs. All rights reserved.
 //
 
-#import "AmbaMachine.h"
-#import "AmbaFileManager.h"
-
-NSString  *tokenKey     = @"token";
-NSString  *msgIdKey     = @"msg_id";
-NSString  *typeKey      = @"type";
-NSString  *offsetKey    = @"offset";
-NSString  *featchSizeKey = @"fetch_size";
-NSString *optionsKey    = @"options";
-//Return keys
-NSString *rvalKey = @"rval";
-NSString *permissionKey = @"permission";
-NSString *pwdKey = @"pwd";
-
-//BiDirectional Key
-NSString *paramKey = @"param";
-
-//CommandStrings
-NSString *startSessionCmd   = @"StartSession";
-NSString *stopSessionCmd    = @"StopSession";
-NSString *recordStartCmd    = @"RecStart";
-NSString *recordStopCmd     = @"RecStop";
-NSString *shutterCmd        = @"Shutter";
-NSString *deviceInfoCmd     = @"deviceInfoCmd";
-NSString *batteryLevelCmd   = @"batteryLevelCmd";
-NSString *stopContPhotoSessionCmd = @"stopContPhotoSessionCmd";
-NSString *recordingTimeCmd  = @"RecordingTime";
-NSString *splitRecordingCmd = @"RecordingSplit";
-NSString *stopVFCmd         = @"StopVF";
-NSString *resetVFCmd        = @"ResetVF";
-NSString *zoomInfoCmd       = @"zoomInfo";
-NSString *setBitRateCmd     = @"BitRate";
-NSString *startEncoderCmd   = @"StartEncoder";
-NSString *changeSettingCmd  = @"ChangeSetting";
-NSString *appStatusCmd      = @"uItronStat";
-NSString *storageSpaceCmd   = @"storageSpace";
-NSString *presentWorkingDirCmd = @"pwd";
-NSString *listAllFilesCmd   = @"listAllFiles";
-NSString *numberOfFilesInFolderCmd = @"numberOfFilesInFolderCmd";
-NSString *changeToFolderCmd = @"changeFolder";
-NSString *mediaInfoCmd      = @"mediaInfo";
-NSString *getFileCmd        = @"getFile";
-NSString *putFileCmd        = @"putFile";
-NSString *stopGetFileCmd    = @"stopGetFile";
-NSString *removeFileCmd     = @"removeFile";
-NSString *fileAttributeCmd  = @"fileAttributeCmd";
-NSString *formatSDMediaCmd  = @"formatSDMediaCmd";
-NSString *allSettingsCmd    = @"allSettings";
-NSString *getSettingValueCmd = @"getSettingValue";
-NSString *getOptionsForValueCmd = @"getOptionsForValue";
-NSString *setCameraParameterCmd = @"setCameraParamValue";
-NSString *getThumbnailCmd = @"getThumbnailCmd";
-NSString *sendCustomJSONCmd = @"sendCustomJSONCmd";
-NSString *setClientInfoCmd  = @"setClientInfoCmd";
-NSString *getWifiSettingsCmd = @"getWifiSettingsCmd";
-NSString *setWifiSettingsCmd = @"setWifiSettingsCmd";
-NSString *getWifiStatusCmd   = @"getWifiStatusCmd";
-NSString *stopWifiCmd        = @"stopWifiCmd";
-NSString *startWifiCmd       = @"startWifiCmd";
-NSString *reStartWifiCmd     = @"reStartWifiCmd";
-NSString *querySessionCmd    = @"querySessionCmd";
-NSString *AMBALOGFILE    = @"AmbaRemoteCam.txt";
-
-
-//command code thats msg_id number as per amba document
-const unsigned int appStatusMsgId       = 1;
-const unsigned int getSettingValueMsgId = 1;
-const unsigned int setCameraParameterMsgId = 2;
-const unsigned int allSettingsMsgId     = 3;
-const unsigned int formatSDMediaMsgId   = 4;
-const unsigned int storageSpaceMsgId    = 5;
-const unsigned int numberOfFilesInFolderId = 6;
-const unsigned int notificationMsgId    = 7;
-const unsigned int getOptionsForValueMsgId = 9;
-const unsigned int deviceInfoMsgId      = 11;
-const unsigned int batteryLevelMsgId    = 13;
-const unsigned int zoomInfoMsgId        = 15;
-const unsigned int setBitRateMsgId      = 16;
-
-
-const unsigned int startSessionMsgId    = 257;
-const unsigned int stopSessionMsgId     = 258;
-const unsigned int resetVFMsgId         = 259;
-const unsigned int stopVFMsgId          = 260;
-const unsigned int setClientInfoMsgId   = 261;
-
-
-const unsigned int recordStartMsgId     = 513;
-const unsigned int recordStopMsgId      = 514;
-const unsigned int recordingTimeMsgId   = 515;
-const unsigned int splitRecordingMsgId  = 516;
-
-const unsigned int shutterMsgId         = 769;
-const unsigned int stopContPhotoSessionMsgId = 770;
-const unsigned int getThumbnailId       = 1025;
-const unsigned int mediaInfoMsgId       = 1026;
-const unsigned int fileAttributeMsgId   = 1027;
-
-const unsigned int removeFileMsgId      = 1281;
-const unsigned int listAllFilesMsgId    = 1282;
-const unsigned int changeToFolderMsgId  = 1283;
-const unsigned int presentWorkingDirMsgId = 1284;
-const unsigned int getFileMsgId         = 1285;
-const unsigned int putFileMsgId         = 1286;
-const unsigned int stopGetFileMsgId     = 1287;
-
-const unsigned int reStartWifiMsgId     = 1537;
-const unsigned int setWifiSettingsMsgId = 1538;
-const unsigned int getWifiSettingsMsgId = 1539;
-const unsigned int stopWifiMsgId        = 1540;
-const unsigned int startWifiMsgId       = 1541;
-const unsigned int getWifiStatusMsgId   = 1542;
-const unsigned int querySessionHolderMsgId = 1793;
-
-const unsigned int sendCustomJSONMsgID = 99999999; //Select some random number for custom cmd.
-//
-unsigned int STATUS_FLAG;
-unsigned int recvResponse;
+#import "AmbaCmdClient.h"
+#import "AmbaDataClient.h"
+#import "AmbaCmdHeader.h"
 
 #define kAsyncTask(queue, block) dispatch_async(queue, block)
 
-@interface AmbaMachine () <NSStreamDelegate> {
+@interface AmbaCmdClient () <NSStreamDelegate> {
     int _sessionToken;
     
     NSString *_typeObject;
@@ -158,9 +43,9 @@ unsigned int recvResponse;
 
 @end
 
-@implementation AmbaMachine
+@implementation AmbaCmdClient
 
-static AmbaMachine *machine;
+static AmbaCmdClient *cmdClient;
 static dispatch_once_t onceToken;
 
 - (NSMutableArray *)ordersOfConcurrent {
@@ -176,19 +61,22 @@ static dispatch_once_t onceToken;
 + (instancetype)sharedMachine {
     
     dispatch_once(&onceToken, ^{
-        machine = [[AmbaMachine alloc] init];
-        if (machine) {
-            [machine configDefaultSetting];
+        cmdClient = [[AmbaCmdClient alloc] init];
+        if (cmdClient) {
+            [cmdClient configDefaultSetting];
         }
     });
     
-    return machine;
+    return cmdClient;
 }
 
 - (void)destoryMachine {
     NSLog(@"%@", NSStringFromSelector(_cmd));
     if (onceToken) {
-        machine = nil;
+        //
+        [[AmbaDataClient sharedInstance] destoryInstance];
+        //
+        cmdClient = nil;
         onceToken = 0;
     }
 }
@@ -509,7 +397,7 @@ static dispatch_once_t onceToken;
     _offsetObject = 0;
     _sizeToDlObject = 0;
     //
-    [[AmbaFileManager sharedInstance] initDataCommunication:ipaddress tcpPort:8787 fileName:_paramObject];
+    [[AmbaDataClient sharedInstance] initDataCommunication:ipaddress tcpPort:8787 fileName:_paramObject];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self ambaGetFile:block];
     });
@@ -647,7 +535,7 @@ static dispatch_once_t onceToken;
             break;
         case NSStreamEventHasBytesAvailable:
         {
-            NSLog(@"接收到上报数据");
+            NSLog(@"[%@]8787 stream receive data", NSStringFromClass([self class]));
             if (aStream == self.inputStream) {
                 uint8_t buffer[1024];
                 NSInteger len;
@@ -733,8 +621,14 @@ static dispatch_once_t onceToken;
         responseDict = [self convertStringToDictionary:responseMsg];
     }
     
-    if ([[responseDict objectForKey:msgIdKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:notificationMsgId]]) {
-        //......
+    int msgId = [[responseDict objectForKey:@"msg_id"] intValue];
+//    if ([[responseDict objectForKey:msgIdKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:notificationMsgId]]) {
+    if (notificationMsgId == msgId) {
+        NSLog(@"get file result: %@", responseDict);
+        if (!([responseMsg rangeOfString:@"get_file_complete"].location == NSNotFound)) {
+            [[AmbaDataClient sharedInstance] closeFileDownloadConnection];
+            NSLog(@"文件下载完成...");
+        }
     }
     else if (_curCommand.messageId == startSessionMsgId)
     {
@@ -859,8 +753,8 @@ static dispatch_once_t onceToken;
         NSLog(@"file is downloading on port 8787");
     } else if (rval != 0) {
         error = [self errorForDescription:[NSString stringWithFormat:@"file finish down"]];
-        [[AmbaFileManager sharedInstance] closeTCPConnection];
-        [[AmbaFileManager sharedInstance] destoryInstance];
+        [[AmbaDataClient sharedInstance] closeTCPConnection];
+        [[AmbaDataClient sharedInstance] destoryInstance];
         
         if (_curCommand.returnBlock) {
             _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
