@@ -6,19 +6,26 @@
 //  Copyright © 2019年 BFs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+//#import <Foundation/Foundation.h>
+#import "AmbaClient.h"
 #import "BFFileAssistant.h"
+#import "AmbaCommand.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AmbaDataClient : NSObject
+@interface AmbaDataClient : AmbaClient
 
 + (instancetype)sharedInstance;
 - (void)destoryInstance;
 //
-- (void)initDataCommunication: (NSString *)ipAddress tcpPort:(NSInteger)tcpPortNo fileName:(NSString *)fileName;
+//- (void)initDataCommunication: (NSString *)ipAddress tcpPort:(NSInteger)tcpPortNo fileName:(NSString *)fileName;
+- (void)connectToDataService:(NSString *)ipAddress tcpPort:(NSInteger)tcpPortNo;
+- (void)closeTheConnectionToDataServer;
+- (void)downloadFile:(NSString *)fileName downloadingBlock:(DownloadingBlock)downloadingBlock andReturnBlock:(ReturnBlock)block;
 - (void)closeFileDownloadConnection;
-- (void)closeTCPConnection;
+//
+- (void)prepareToGetThumbnailOfFile:(NSString *)fileName;
+- (NSString *)getDownloadFilePath;
 
 @end
 

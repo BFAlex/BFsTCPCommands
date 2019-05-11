@@ -65,6 +65,7 @@ static fileDownload *fileDLinstance = nil;
 
 - (void) stream:(NSStream *)aStream handleEvent:(NSStreamEvent)streamEvent
 {
+     NSLog(@"[%@ %@] %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (unsigned long)streamEvent);
     switch (streamEvent)
     {
         case NSStreamEventOpenCompleted:

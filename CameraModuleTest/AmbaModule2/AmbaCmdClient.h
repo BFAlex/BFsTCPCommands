@@ -6,7 +6,8 @@
 //  Copyright © 2019年 BFs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+//#import <Foundation/Foundation.h>
+#import "AmbaClient.h"
 #import "AmbaCommand.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,10 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)ambaMachine:(AmbaCmdClient *)machine didUpdateConnectionStatus:(BOOL)isConnected  forStream:(NSStream *)pStream;
+- (void)ambaMachine:(AmbaCmdClient *)machine finishDownload:(id)result;
 
 @end
 
-@interface AmbaCmdClient : NSObject
+@interface AmbaCmdClient : AmbaClient
 
 @property (nonatomic, weak) id<AmbaCmdClientDelegate> delegate;
 @property (nonatomic, assign) BOOL isConnected;
@@ -48,7 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)resetVF:(ReturnBlock)block;
 - (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block;
 // 文件
-- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block;
+//- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block;
+- (void)getMediaFile:(NSString *)fileName downloadingBlock:(DownloadingBlock)downloadingBlock andReturnBlock:(ReturnBlock)block;
 
 
 @end

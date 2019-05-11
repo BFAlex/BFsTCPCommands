@@ -7,10 +7,13 @@
 //
 
 #import "AmbaController.h"
-#import "AmbaCmdClient.h"
 #import "CameraControllerHeader.h"
 
-@interface AmbaController () <AmbaCmdClientDelegate>
+@interface AmbaController () <AmbaCmdClientDelegate> {
+    NSString *_machineIp;
+    int _cmdPort;
+    int _dataPort;
+}
 @property (nonatomic, strong) AmbaCmdClient *ambaCmdClient;
 @property (nonatomic, assign) ReturnBlock connectedStatusBlock;
 
@@ -20,6 +23,14 @@
 
 #pragma mark - API
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [self configDefaultSetting];
+    }
+    
+    return self;
+}
+
 - (void)connectToCamera:(ReturnBlock)block {
     
     if (!_ambaCmdClient) {
@@ -27,7 +38,7 @@
         _ambaCmdClient.delegate = self;
     }
     _connectedStatusBlock = block;
-    [_ambaCmdClient initNetworkCommunication:@"192.168.42.1" tcpPort:7878];
+    [_ambaCmdClient initNetworkCommunication:_machineIp tcpPort:_cmdPort];
 }
 
 - (void)disconnectFromCamera:(ReturnBlock)block {
@@ -36,7 +47,16 @@
 }
 
 - (void)startSession:(ReturnBlock)block {
-    [_ambaCmdClient startSession:block];
+    [_ambaCmdClient startSession:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        //
+        if (error) {
+            if (block) {
+                block(error, cmd, result, type);
+            }
+        } else {
+            [self setClientInfo:block];
+        }
+    }];
 }
 
 - (void)setClientInfo:(ReturnBlock)block {
@@ -103,8 +123,38 @@
     [_ambaCmdClient getThumbnail:param value:value andReturnBlock:block];
 }
 
-- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block {
-    [_ambaCmdClient getMediaFile:fileName ipAddress:ipaddress andReturnBlock:block];
+- (void)getThumbnailOfFile:(NSString *)filePath andReturnBlock:(ReturnBlock)block {
+    [_ambaCmdClient getThumbnail:[self fileThumbnailType:filePath] value:filePath andReturnBlock:block];
+}
+
+//- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block {
+//    [_ambaCmdClient getMediaFile:fileName ipAddress:ipaddress andReturnBlock:block];
+//}
+- (void)getMediaFile:(NSString *)fileName downloadingBlock:(DownloadingBlock)downloadingBlock andReturnBlock:(ReturnBlock)block {
+    [_ambaCmdClient getMediaFile:fileName downloadingBlock:downloadingBlock andReturnBlock:block];
+}
+
+#pragma mark - Func
+
+- (void)configDefaultSetting {
+    
+    _machineIp = @"192.168.42.1";
+    _cmdPort = 7878;
+    _dataPort = 8787;
+}
+
+- (NSString *)fileThumbnailType:(NSString *)filePath {
+    //
+    NSString *type = @"IDR";
+    if ([[filePath pathExtension] isEqualToString:@"jpg"] || [[filePath pathExtension] isEqualToString:@"JPG"])
+    {
+        type = @"thumb";
+    }
+//    else if ([[filePath pathExtension] isEqualToString:@"mp4"] || [[filePath pathExtension] isEqualToString:@"MP4"])
+//    {
+//        return @"IDR";
+//    }
+    return type;
 }
 
 #pragma mark - AmbaCmdClientDelegate
@@ -119,6 +169,18 @@
         NSDictionary *resultDict = @{@"ConnectStatus":@(isConnected)};
         _connectedStatusBlock(nil, 0, resultDict, ResultTypeNone);
     }
+}
+
+- (void)ambaMachine:(AmbaCmdClient *)machine finishDownload:(id)result {
+    
+    if ([result isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *resultDict = (NSDictionary *)result;
+        NSLog(@"finishDownload result: %@", resultDict);
+    }
+    
+//    UIAlertController *downloadAlert = [UIAlertController alertControllerWithTitle:nil message:@"finish download" preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:nil];
+//    [downloadAlert addAction:okAction];
 }
 
 @end

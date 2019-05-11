@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CameraControllerHeader.h"
+#import "AmbaCmdClient.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,8 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stopVF:(ReturnBlock)block;
 - (void)resetVF:(ReturnBlock)block;
 - (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block;
+- (void)getThumbnailOfFile:(NSString *)filePath andReturnBlock:(ReturnBlock)block;
 // 文件
-- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block;
+//- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block;
+- (void)getMediaFile:(NSString *)fileName downloadingBlock:(DownloadingBlock)downloadingBlock andReturnBlock:(ReturnBlock)block;
 
 @end
 

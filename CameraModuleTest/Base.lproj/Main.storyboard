@@ -196,12 +196,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dc2-Cf-yJg">
-                                <rect key="frame" x="16" y="292" width="94" height="36"/>
+                                <rect key="frame" x="16" y="292" width="110" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="94" id="n68-gJ-8r0"/>
+                                    <constraint firstAttribute="width" constant="110" id="n68-gJ-8r0"/>
                                     <constraint firstAttribute="height" constant="36" id="pMA-W0-dkb"/>
                                 </constraints>
-                                <state key="normal" title="文件路径"/>
+                                <state key="normal" title="多媒体文件路径"/>
                                 <connections>
                                     <action selector="actionFilePathBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ksz-C2-phT"/>
                                 </connections>
@@ -229,7 +229,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asa-pC-LEw">
-                                <rect key="frame" x="118" y="292" width="94" height="36"/>
+                                <rect key="frame" x="134" y="292" width="94" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="YKZ-i6-0o3"/>
                                     <constraint firstAttribute="width" constant="94" id="iWg-ur-3Ew"/>
@@ -268,6 +268,13 @@
                                     <action selector="actionLocalFilesBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jP6-FS-sVs"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zec-OL-QYv">
+                                <rect key="frame" x="16" y="389" width="212" height="82"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="82" id="35I-Bs-azA"/>
+                                    <constraint firstAttribute="width" constant="212" id="LQB-QL-Z2G"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -290,6 +297,7 @@
                             <constraint firstItem="2CU-ir-9I6" firstAttribute="width" secondItem="btD-pq-kok" secondAttribute="width" id="Ggy-HJ-3XZ"/>
                             <constraint firstItem="asa-pC-LEw" firstAttribute="top" secondItem="m4T-G1-9xf" secondAttribute="bottom" constant="8" id="Gt4-bD-w2N"/>
                             <constraint firstItem="RaQ-A4-NHP" firstAttribute="width" secondItem="Isc-B1-YL0" secondAttribute="width" id="IV7-51-cjX"/>
+                            <constraint firstItem="zec-OL-QYv" firstAttribute="top" secondItem="LcT-OX-tZ6" secondAttribute="bottom" constant="8" id="KYp-vi-r4F"/>
                             <constraint firstItem="RQx-2L-FmD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LAw-nK-hfs"/>
                             <constraint firstItem="4QR-Ih-KhV" firstAttribute="top" secondItem="FwP-yF-8je" secondAttribute="bottom" constant="8" id="MeU-H1-lEI"/>
                             <constraint firstItem="j13-GW-0OM" firstAttribute="top" secondItem="2CU-ir-9I6" secondAttribute="top" id="MfI-Xa-vrg"/>
@@ -302,6 +310,7 @@
                             <constraint firstItem="VjH-Rx-L1H" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="RpQ-67-bRC"/>
                             <constraint firstItem="LcT-OX-tZ6" firstAttribute="top" secondItem="RQx-2L-FmD" secondAttribute="bottom" constant="8" id="SWy-8X-Oig"/>
                             <constraint firstItem="Dfl-sA-p6C" firstAttribute="width" secondItem="5Dj-dn-OKT" secondAttribute="width" id="SX4-4f-mCZ"/>
+                            <constraint firstItem="zec-OL-QYv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Sfx-7M-sxZ"/>
                             <constraint firstItem="5Dj-dn-OKT" firstAttribute="width" secondItem="bVh-gi-5tM" secondAttribute="width" id="Tyk-Fj-OaQ"/>
                             <constraint firstItem="2CU-ir-9I6" firstAttribute="top" secondItem="btD-pq-kok" secondAttribute="bottom" constant="8" id="UZS-XL-BSL"/>
                             <constraint firstItem="bVh-gi-5tM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XLK-Vr-AtY"/>
@@ -330,6 +339,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="resultImage" destination="zec-OL-QYv" id="XDi-Q3-g1L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

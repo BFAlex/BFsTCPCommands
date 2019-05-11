@@ -9,6 +9,9 @@
 #import "AmbaCmdClient.h"
 #import "AmbaDataClient.h"
 #import "AmbaCmdHeader.h"
+//
+#include <ifaddrs.h>
+#include <arpa/inet.h>
 
 #define kAsyncTask(queue, block) dispatch_async(queue, block)
 
@@ -24,10 +27,12 @@
     NSMutableString *tmpString;
     
     dispatch_semaphore_t _taskSemaphore;
-    
     int     _curOperationCount; // 同步队列专用参数
+    //
+    NSString *_fileTotalSize;
 }
 @property (nonatomic, strong) NSString *ipAddress;
+@property (nonatomic, strong) NSString *dataIpAddress;
 @property (nonatomic, strong) NSString *tmpMsgStr;
 @property (nonatomic, strong) NSInputStream *inputStream;
 @property (nonatomic, strong) NSOutputStream *outputStream;
@@ -40,6 +45,8 @@
 @property (nonatomic, assign) BOOL isExecutingNetworkOrder;
 @property (nonatomic, strong) NSMutableArray *ordersOfConcurrent;
 @property (nonatomic, assign) NSUInteger maxConcurrentOperationCount;
+//
+@property (nonatomic, strong) AmbaDataClient *dataClient;
 
 @end
 
@@ -74,7 +81,7 @@ static dispatch_once_t onceToken;
     NSLog(@"%@", NSStringFromSelector(_cmd));
     if (onceToken) {
         //
-        [[AmbaDataClient sharedInstance] destoryInstance];
+        [_dataClient destoryInstance];
         //
         cmdClient = nil;
         onceToken = 0;
@@ -109,6 +116,10 @@ static dispatch_once_t onceToken;
     if (self.inputStream) {
         [self.inputStream close];
     }
+    //
+    if (_dataClient) {
+        [_dataClient closeFileDownloadConnection];
+    }
 }
 
 - (void)startSession:(ReturnBlock)block {
@@ -121,7 +132,11 @@ static dispatch_once_t onceToken;
     command.taskBlock = ^{
         [weakSelf startCmd:weakCmd];
     };
-    command.returnBlock = block;
+    command.returnBlock = ^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        [self->_dataClient connectToDataService:self->_ipAddress tcpPort:8787]; // @"192.168.42.1"
+        [self updateLocalWifiIPaddress];
+        block(error, cmd, result, type);
+    };
     [self addOrder:command];
 }
 
@@ -131,7 +146,7 @@ static dispatch_once_t onceToken;
     command.curCommand = setClientInfoCmd;
     int curMessageId = setClientInfoMsgId;
     command.messageId = curMessageId;
-    _paramObject = self.ipAddress;
+    _paramObject = self.dataIpAddress; //self.ipAddress
     _typeObject = @"TCP";
     __weak typeof(command) weakCmd = command;
     __weak typeof(self) weakSelf = self;
@@ -375,7 +390,9 @@ static dispatch_once_t onceToken;
 }
 
 - (void)getThumbnail:(NSString *)param value:(NSString *)value andReturnBlock:(ReturnBlock)block {
-    
+    //
+    [_dataClient prepareToGetThumbnailOfFile:value];
+    //
     AmbaCommand *command = [AmbaCommand command];
     command.curCommand = getThumbnailCmd;
     int curMessageId = getThumbnailId;
@@ -387,29 +404,65 @@ static dispatch_once_t onceToken;
     command.taskBlock = ^{
         [weakSelf startCmd:weakCmd];
     };
-    command.returnBlock = block;
+    command.returnBlock = ^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        if (!error) {
+            
+            NSDictionary *updateDict = [self resultExtensionThumbnail:result];
+            //
+            if (block) {
+                block(error, cmd, updateDict, type);
+            }
+        } else {
+            block(error, cmd, result, type);
+        }
+    };
     [self addOrder:command];
 }
 
-- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block {
+//- (void)getMediaFile:(NSString *)fileName ipAddress:(NSString *)ipaddress andReturnBlock:(ReturnBlock)block {
+//
+//    _paramObject = fileName;
+//    _offsetObject = 0;
+//    _sizeToDlObject = 0;
+//    //
+//    [[AmbaDataClient sharedInstance] initDataCommunication:ipaddress tcpPort:8787 fileName:_paramObject];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self ambaGetFile:block];
+//    });
+//
+//}
+- (void)getMediaFile:(NSString *)fileName downloadingBlock:(DownloadingBlock)downloadingBlock andReturnBlock:(ReturnBlock)block {
     
-    _paramObject = fileName;
-    _offsetObject = 0;
-    _sizeToDlObject = 0;
-    //
-    [[AmbaDataClient sharedInstance] initDataCommunication:ipaddress tcpPort:8787 fileName:_paramObject];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self ambaGetFile:block];
-    });
-    
+    [_dataClient downloadFile:fileName downloadingBlock:^(AmbaClient *client, NSString *downloadingSize, NSString *totalSize) {
+        if (downloadingBlock) {
+            downloadingBlock(client, downloadingSize, self->_fileTotalSize);
+        }
+    } andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+        self->_fileTotalSize = @"0";
+        [self ambaGetFile:fileName andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+            if (!error) {
+                NSDictionary *updateResult = [self resultExtensionThumbnail:result];
+                if (block) {
+                    block(error, cmd, updateResult, type);
+                }
+            } else {
+                if (block) {
+                    block(error, cmd, result, type);
+                }
+            }
+        }];
+    }];
 }
 
-- (void)ambaGetFile:(ReturnBlock)block {
+- (void)ambaGetFile:(NSString *)fileName andReturnBlock:(ReturnBlock)block {
     
     AmbaCommand *command = [AmbaCommand command];
     command.curCommand = getFileCmd;
     int curMessageId = getFileMsgId;
     command.messageId = curMessageId;
+    _paramObject = fileName;
+    _offsetObject = 0;
+    _sizeToDlObject = 0;
     __weak typeof(command) weakCmd = command;
     __weak typeof(self) weakSelf = self;
     command.taskBlock = ^{
@@ -535,7 +588,7 @@ static dispatch_once_t onceToken;
             break;
         case NSStreamEventHasBytesAvailable:
         {
-            NSLog(@"[%@]8787 stream receive data", NSStringFromClass([self class]));
+            NSLog(@"[%@]7878 stream receive data", NSStringFromClass([self class]));
             if (aStream == self.inputStream) {
                 uint8_t buffer[1024];
                 NSInteger len;
@@ -614,19 +667,23 @@ static dispatch_once_t onceToken;
 }
 
 - (void)handleResultStringMsg:(id)responseMsg {
+    NSLog(@"[%@ %@]:%@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), responseMsg);
     
-    NSLog(@"[%@]:%@", NSStringFromSelector(_cmd), responseMsg);
     NSDictionary *responseDict;
     if ([responseMsg isKindOfClass:[NSString class]]) {
-        responseDict = [self convertStringToDictionary:responseMsg];
+//        responseDict = [self convertStringToDictionary:responseMsg];
+        //
+        NSData *data = [responseMsg dataUsingEncoding:NSUTF8StringEncoding];
+        responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                       options:kNilOptions
+                                                         error:nil];
     }
     
     int msgId = [[responseDict objectForKey:@"msg_id"] intValue];
-//    if ([[responseDict objectForKey:msgIdKey] isEqualToNumber:[NSNumber numberWithUnsignedInteger:notificationMsgId]]) {
     if (notificationMsgId == msgId) {
         NSLog(@"get file result: %@", responseDict);
         if (!([responseMsg rangeOfString:@"get_file_complete"].location == NSNotFound)) {
-            [[AmbaDataClient sharedInstance] closeFileDownloadConnection];
+//            [_dataClient closeFileDownloadConnection];
             NSLog(@"文件下载完成...");
         }
     }
@@ -698,10 +755,13 @@ static dispatch_once_t onceToken;
     {
         [self responseToCmd:responseMsg];
     }
+    else if (_curCommand.messageId == getThumbnailId)
+    {
+        [self responseToCmd:responseMsg];
+    }
     
 //    [self.lockOfNetwork unlock];
     dispatch_semaphore_signal(_taskSemaphore);
-//    NSLog(@"task thread(result): %@", [NSThread currentThread]);
 }
 
 #pragma mark - Handle Message
@@ -751,14 +811,14 @@ static dispatch_once_t onceToken;
     
     if (rval == 0) {
         NSLog(@"file is downloading on port 8787");
+        _fileTotalSize = [responseDict objectForKey:@"size"];
     } else if (rval != 0) {
         error = [self errorForDescription:[NSString stringWithFormat:@"file finish down"]];
-        [[AmbaDataClient sharedInstance] closeTCPConnection];
-        [[AmbaDataClient sharedInstance] destoryInstance];
-        
-        if (_curCommand.returnBlock) {
-            _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
-        }
+        [_dataClient closeTheConnectionToDataServer];
+        [_dataClient destoryInstance];
+    }
+    if (_curCommand.returnBlock) {
+        _curCommand.returnBlock(error, 0, responseDict, ResultTypeNone);
     }
 }
 
@@ -1230,6 +1290,48 @@ static dispatch_once_t onceToken;
     _curOperationCount = 0;
     
     _taskSemaphore = dispatch_semaphore_create(1);
+    //
+    _dataClient = [AmbaDataClient sharedInstance];
+}
+
+- (void) updateLocalWifiIPaddress
+{
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *tmpAddrs = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        tmpAddrs = interfaces;
+        while (tmpAddrs != NULL) {
+            if (tmpAddrs->ifa_addr->sa_family == AF_INET) {
+                if ([[NSString stringWithUTF8String:tmpAddrs->ifa_name ] isEqualToString:@"en0" ]) {
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)tmpAddrs->ifa_addr)->sin_addr)];
+                }
+            }
+            tmpAddrs = tmpAddrs->ifa_next;
+        }
+    }
+    freeifaddrs(interfaces);
+    
+    self.dataIpAddress = address;
+}
+
+- (NSDictionary *)resultExtensionThumbnail:(id)result {
+    
+    NSDictionary *resultDict = (NSDictionary *)result;
+    NSArray *allKeys = [resultDict allKeys];
+    NSMutableDictionary *updateDict = [NSMutableDictionary dictionary];
+    for (NSString *key in allKeys) {
+        [updateDict setObject:[resultDict objectForKey:key] forKey:key];
+    }
+    NSString *filePath = [self->_dataClient getDownloadFilePath];
+    if (filePath.length > 1) {
+        [updateDict setObject:filePath forKey:@"path"];
+    }
+    
+    return updateDict;
 }
 
 @end

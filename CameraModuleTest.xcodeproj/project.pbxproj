@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C4245DD32282B6AD00578721 /* AmbaDataClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C4245DD22282B6AD00578721 /* AmbaDataClient.m */; };
 		C4245DD72282CE4600578721 /* BFFileAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = C4245DD52282CE4600578721 /* BFFileAssistant.m */; };
+		C4521AB022867D98005160EE /* AmbaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C4521AAF22867D98005160EE /* AmbaClient.m */; };
 		C4FC1B27227697E10094419C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B26227697E00094419C /* AppDelegate.m */; };
 		C4FC1B2A227697E10094419C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B29227697E10094419C /* ViewController.m */; };
 		C4FC1B2D227697E10094419C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4FC1B2B227697E10094419C /* Main.storyboard */; };
@@ -25,6 +26,8 @@
 		C4245DD22282B6AD00578721 /* AmbaDataClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AmbaDataClient.m; sourceTree = "<group>"; };
 		C4245DD52282CE4600578721 /* BFFileAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFFileAssistant.m; sourceTree = "<group>"; };
 		C4245DD62282CE4600578721 /* BFFileAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFFileAssistant.h; sourceTree = "<group>"; };
+		C4521AAE22867D98005160EE /* AmbaClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbaClient.h; sourceTree = "<group>"; };
+		C4521AAF22867D98005160EE /* AmbaClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AmbaClient.m; sourceTree = "<group>"; };
 		C4ACA1012283CA6500A855EF /* AmbaCmdHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbaCmdHeader.h; sourceTree = "<group>"; };
 		C4FC1B22227697E00094419C /* CameraModuleTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraModuleTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4FC1B25227697E00094419C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 				C4FC1B5B2276E3AB0094419C /* AmbaController.m */,
 				C4FC1B682276E77B0094419C /* AmbaCommand.h */,
 				C4FC1B692276E77B0094419C /* AmbaCommand.m */,
+				C4521AAE22867D98005160EE /* AmbaClient.h */,
+				C4521AAF22867D98005160EE /* AmbaClient.m */,
 				C4FC1B5C2276E3AB0094419C /* AmbaCmdClient.h */,
 				C4FC1B5D2276E3AB0094419C /* AmbaCmdClient.m */,
 				C4245DD12282B6AD00578721 /* AmbaDataClient.h */,
@@ -187,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4245DD32282B6AD00578721 /* AmbaDataClient.m in Sources */,
+				C4521AB022867D98005160EE /* AmbaClient.m in Sources */,
 				C4FC1B6A2276E77B0094419C /* AmbaCommand.m in Sources */,
 				C4FC1B5E2276E3AB0094419C /* AmbaController.m in Sources */,
 				C4FC1B2A227697E10094419C /* ViewController.m in Sources */,

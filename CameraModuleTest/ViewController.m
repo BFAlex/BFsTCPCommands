@@ -12,6 +12,7 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) AmbaController *ambaController;
+@property (weak, nonatomic) IBOutlet UIImageView *resultImage;
 
 @end
 
@@ -73,9 +74,9 @@
         NSString *resultStr = error ? error.description : @"成功";
         NSLog(@"setting结果: %@", resultStr);
         
-        [self->_ambaController setClientInfo:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
-            NSLog(@"set client: %@", result);
-        }];
+//        [self->_ambaController setClientInfo:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+//            NSLog(@"set client: %@", result);
+//        }];
     }];
 }
 - (IBAction)actionFormatSDBtn:(UIButton *)sender {
@@ -158,22 +159,38 @@
 - (IBAction)actionThumbnailBtn:(UIButton *)sender {
 
     // 视频
-//    [_ambaController getThumbnail:@"IDR" value:@"/tmp/SD0/DCIM/190505000/00000_00000020190505203335_0001A.MP4" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+//    NSString *videoPath = @"/tmp/SD0/DCIM/190510000/00000_00000020190510100755_0004A.MP4";
+//    [_ambaController getThumbnail:@"IDR" value:videoPath andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
 //        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
 //    }];
     // 图片
-    [_ambaController getThumbnail:@"thumb" value:@"/tmp/SD0/DCIM/190506000/00000_00000020190506112343_0009.JPG" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+//    NSString *photoPath = @"/tmp/SD0/DCIM/190509000/00000_00000020190509141613_0002.JPG";
+//    [_ambaController getThumbnail:@"thumb" value:photoPath andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+//        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+//    }];
+    
+//    NSString *filePath = @"/tmp/SD0/DCIM/190509000/00000_00000020190509141613_0002.JPG";
+    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508182255_0012A.MP4";
+    [_ambaController getThumbnailOfFile:filePath andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
         NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
+        NSDictionary *resultDict = (NSDictionary *)result;
+        NSString *filePath = [resultDict objectForKey:@"path"];
+        NSData *imgData = [NSData dataWithContentsOfFile:filePath];
+        self.resultImage.image = [UIImage imageWithData:imgData];
     }];
+    
 }
 - (IBAction)actionFileBtn:(UIButton *)sender {
     
-//    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508155523_0005.JPG";
-    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508182255_0012A.MP4";
+    NSString *filePath = @"/tmp/SD0/DCIM/190509000/00000_00000020190509141613_0002.JPG";
+//    NSString *filePath = @"/tmp/SD0/DCIM/190510000/11.MP4";
     
-    [_ambaController getMediaFile:filePath ipAddress:@"192.168.42.1" andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
+    [_ambaController getMediaFile:filePath downloadingBlock:^(AmbaClient *client, NSString *downloadingSize, NSString *totalSize) {
+        NSLog(@"%@ downloaded Size:[%@]%@", [client class], totalSize, downloadingSize);
+    } andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
         NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
     }];
+    
 }
 - (IBAction)actionLocalFilesBtn:(UIButton *)sender {
     NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
