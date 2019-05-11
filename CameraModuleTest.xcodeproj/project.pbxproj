@@ -16,7 +16,7 @@
 		C4FC1B2F227697F10094419C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4FC1B2E227697F10094419C /* Assets.xcassets */; };
 		C4FC1B32227697F10094419C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4FC1B30227697F10094419C /* LaunchScreen.storyboard */; };
 		C4FC1B35227697F10094419C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B34227697F10094419C /* main.m */; };
-		C4FC1B5E2276E3AB0094419C /* AmbaController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B5B2276E3AB0094419C /* AmbaController.m */; };
+		C4FC1B5E2276E3AB0094419C /* AmbaControllerDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B5B2276E3AB0094419C /* AmbaControllerDemo.m */; };
 		C4FC1B5F2276E3AB0094419C /* AmbaCmdClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B5D2276E3AB0094419C /* AmbaCmdClient.m */; };
 		C4FC1B6A2276E77B0094419C /* AmbaCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FC1B692276E77B0094419C /* AmbaCommand.m */; };
 /* End PBXBuildFile section */
@@ -40,8 +40,8 @@
 		C4FC1B33227697F10094419C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4FC1B34227697F10094419C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4FC1B4622769A2D0094419C /* CameraControllerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraControllerHeader.h; sourceTree = "<group>"; };
-		C4FC1B5A2276E3AB0094419C /* AmbaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbaController.h; sourceTree = "<group>"; };
-		C4FC1B5B2276E3AB0094419C /* AmbaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmbaController.m; sourceTree = "<group>"; };
+		C4FC1B5A2276E3AB0094419C /* AmbaControllerDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbaControllerDemo.h; sourceTree = "<group>"; };
+		C4FC1B5B2276E3AB0094419C /* AmbaControllerDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmbaControllerDemo.m; sourceTree = "<group>"; };
 		C4FC1B5C2276E3AB0094419C /* AmbaCmdClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmbaCmdClient.h; sourceTree = "<group>"; };
 		C4FC1B5D2276E3AB0094419C /* AmbaCmdClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmbaCmdClient.m; sourceTree = "<group>"; };
 		C4FC1B682276E77B0094419C /* AmbaCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbaCommand.h; sourceTree = "<group>"; };
@@ -66,6 +66,13 @@
 				C4245DD52282CE4600578721 /* BFFileAssistant.m */,
 			);
 			path = FileModule;
+			sourceTree = "<group>";
+		};
+		C4ED72422286D8E7007C6877 /* TargetClass */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TargetClass;
 			sourceTree = "<group>";
 		};
 		C4FC1B19227697E00094419C = {
@@ -106,8 +113,9 @@
 		C4FC1B592276E3AB0094419C /* AmbaModule2 */ = {
 			isa = PBXGroup;
 			children = (
-				C4FC1B5A2276E3AB0094419C /* AmbaController.h */,
-				C4FC1B5B2276E3AB0094419C /* AmbaController.m */,
+				C4ED72422286D8E7007C6877 /* TargetClass */,
+				C4FC1B5A2276E3AB0094419C /* AmbaControllerDemo.h */,
+				C4FC1B5B2276E3AB0094419C /* AmbaControllerDemo.m */,
 				C4FC1B682276E77B0094419C /* AmbaCommand.h */,
 				C4FC1B692276E77B0094419C /* AmbaCommand.m */,
 				C4521AAE22867D98005160EE /* AmbaClient.h */,
@@ -194,7 +202,7 @@
 				C4245DD32282B6AD00578721 /* AmbaDataClient.m in Sources */,
 				C4521AB022867D98005160EE /* AmbaClient.m in Sources */,
 				C4FC1B6A2276E77B0094419C /* AmbaCommand.m in Sources */,
-				C4FC1B5E2276E3AB0094419C /* AmbaController.m in Sources */,
+				C4FC1B5E2276E3AB0094419C /* AmbaControllerDemo.m in Sources */,
 				C4FC1B2A227697E10094419C /* ViewController.m in Sources */,
 				C4FC1B35227697F10094419C /* main.m in Sources */,
 				C4FC1B5F2276E3AB0094419C /* AmbaCmdClient.m in Sources */,

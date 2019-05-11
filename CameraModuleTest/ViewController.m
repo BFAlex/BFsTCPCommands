@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "AmbaController.h"
+#import "AmbaControllerDemo.h"
 #import "BFFileAssistant.h"
 
 @interface ViewController ()
-@property (nonatomic, strong) AmbaController *ambaController;
+@property (nonatomic, strong) AmbaControllerDemo *ambaController;
 @property (weak, nonatomic) IBOutlet UIImageView *resultImage;
 
 @end
@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _ambaController = [[AmbaController alloc] init];
+    _ambaController = [[AmbaControllerDemo alloc] init];
 }
 
 - (IBAction)actionConnectBtn:(UIButton *)sender {
