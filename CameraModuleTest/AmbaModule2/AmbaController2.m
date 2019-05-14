@@ -6,10 +6,10 @@
 //  Copyright © 2019年 BFs. All rights reserved.
 //
 
-#import "AmbaControllerDemo.h"
+#import "AmbaController2.h"
 #import "CameraControllerHeader.h"
 
-@interface AmbaControllerDemo () <AmbaCmdClientDelegate> {
+@interface AmbaController2 () <AmbaCmdClientDelegate> {
     NSString *_machineIp;
     int _cmdPort;
     int _dataPort;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation AmbaControllerDemo
+@implementation AmbaController2
 
 #pragma mark - API
 

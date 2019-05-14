@@ -7,11 +7,11 @@
 //
 
 #import "ViewController.h"
-#import "AmbaControllerDemo.h"
+#import "AmbaController2.h"
 #import "BFFileAssistant.h"
 
 @interface ViewController ()
-@property (nonatomic, strong) AmbaControllerDemo *ambaController;
+@property (nonatomic, strong) AmbaController2 *ambaController;
 @property (weak, nonatomic) IBOutlet UIImageView *resultImage;
 
 @end
@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _ambaController = [[AmbaControllerDemo alloc] init];
+    _ambaController = [[AmbaController2 alloc] init];
 }
 
 - (IBAction)actionConnectBtn:(UIButton *)sender {
@@ -157,17 +157,6 @@
     [self startSearchFiles];
 }
 - (IBAction)actionThumbnailBtn:(UIButton *)sender {
-
-    // 视频
-//    NSString *videoPath = @"/tmp/SD0/DCIM/190510000/00000_00000020190510100755_0004A.MP4";
-//    [_ambaController getThumbnail:@"IDR" value:videoPath andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
-//        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
-//    }];
-    // 图片
-//    NSString *photoPath = @"/tmp/SD0/DCIM/190509000/00000_00000020190509141613_0002.JPG";
-//    [_ambaController getThumbnail:@"thumb" value:photoPath andReturnBlock:^(NSError *error, NSUInteger cmd, id result, ResultType type) {
-//        NSLog(@"%@: %@", NSStringFromSelector(_cmd), result);
-//    }];
     
 //    NSString *filePath = @"/tmp/SD0/DCIM/190509000/00000_00000020190509141613_0002.JPG";
     NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508182255_0012A.MP4";
@@ -180,9 +169,13 @@
     }];
     
 }
+- (IBAction)actionFileInfoBtn:(UIButton *)sender {
+    NSString *file;
+    
+}
 - (IBAction)actionFileBtn:(UIButton *)sender {
     
-    NSString *filePath = @"/tmp/SD0/DCIM/190509000/00000_00000020190509141613_0002.JPG";
+    NSString *filePath = @"/tmp/SD0/DCIM/190508000/00000_00000020190508155522_0004.JPG";
 //    NSString *filePath = @"/tmp/SD0/DCIM/190510000/11.MP4";
     
     [_ambaController getMediaFile:filePath downloadingBlock:^(AmbaClient *client, NSString *downloadingSize, NSString *totalSize) {

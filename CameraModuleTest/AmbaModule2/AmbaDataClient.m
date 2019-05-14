@@ -47,6 +47,7 @@ static dispatch_once_t onceToken;
     NSLog(@"[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
     if (onceToken > 0) {
+        [self closeFileDownloadConnection];
         dataClient = nil;
         onceToken = 0;
     }

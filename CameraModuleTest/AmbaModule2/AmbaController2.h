@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AmbaControllerDemo : NSObject
+@interface AmbaController2 : NSObject
 
 - (void)connectToCamera:(ReturnBlock)block;
 - (void)disconnectFromCamera:(ReturnBlock)block;
